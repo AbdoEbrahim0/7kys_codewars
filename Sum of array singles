@@ -1,15 +1,75 @@
- using namespace std;
-    //method 1:
-int repeats(std::vector<int>v) {
-    //...[4,5,7,5,4,8]
-    int sum = 0, times = 0;
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+//method 1:
+//int repeats(std::vector<int>v) {
+//    //...[4,5,7,5,4,8]
+//    int sum = 0, times = 0;
+//
+//    for (int i = 0; i < v.size(); i++)
+//    {
+//        for (int j = 0; j < v.size(); j++)
+//            if (v.at(i) == v.at(j)) times++;
+//        if (times == 1) sum += v.at(i);
+//        times = 0;
+//    }
+//    return sum;
+//}
+//methode 2
+//int repeats(std::vector<int>v) {
+//    //...[4,5,7,5,4,8]
+//    int sum = 0;
+// 
+//    for (int val : v)
+//    {
+//        int out = count(v.begin(), v.end(), val);
+//        if (out == 1) sum += val;
+//    }
+//    return sum;
+//}
 
-    for (int i = 0; i < v.size(); i++)
+//methode 3
+//int repeats(std::vector<int>v) {
+//    //...[4,5,7,5,4,8]
+//    set<int> my_set;
+//    for (int val : v)
+//        my_set.insert(val);
+//    return 2*accumulate(my_set.begin(), my_set.end(), 0) - accumulate(v.begin(), v.end(), 0);
+//}
+//methode 4
+int repeats(std::vector<int>v) {
+    int sum = 0;
+    sort(v.begin(), v.end());
+    for (int i = 1; i < v.size() - 1; i++) //ignore 1st elemnt and last element  in loop
     {
-        for (int j = 0; j < v.size(); j++)
-            if (v.at(i) == v.at(j)) times++;
-        if (times == 1) sum += v.at(i);
-        times = 0;
+        if (v.at(i) != v.at(i + 1) && v.at(i) != v.at(i - 1)) sum += v.at(i);
     }
+    if (v.at(0) != v.at(1))  sum += v.at(0);  //handle 1st element 
+    if (v.at(v.size() - 1) != (v.at(v.size() - 2))) sum += v.at(v.size() - 1); //handle last element 
     return sum;
+}
+//ignore 1st elemnt and last element  in loop
+int main() {
+    vector<int> vec = { 4,5,7,5,4,8};
+    cout<<repeats(vec);
+    return 0;
 }

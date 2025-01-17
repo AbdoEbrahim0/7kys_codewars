@@ -1,0 +1,66 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+//method 1:
+//std::string gimme_the_letters(const std::string& sp)
+//{
+//    string out="";
+//    for (int i = sp[0]; i <= sp[2]; i++)
+//    {
+//        out += char(i);
+//    }
+//    return out;
+//}
+
+//std::string gimme_the_letters(const std::string& sp)
+//{
+//    string out = "";
+//    int i = 0;
+//    while (true)
+//    {
+//        out += (sp[0] + i);
+//        if (( sp[0]+i) == sp[2]) break;
+//        i++;
+//    }
+//    return out;
+//}
+
+std::string gimme_the_letters(const std::string& sp)
+{
+    string out = "";
+    int i = 0;
+    while ((sp[0] + i) <= sp[2])
+    {
+        out += (sp[0] + i);
+        
+        i++;
+    }
+    return out;
+}
+int main() {
+cout<<    gimme_the_letters("y-z");
+
+    /*vector<int> vec = { 4,5,7,5,4,8};
+    cout<<repeats(vec);*/
+
+        return 0;
+}

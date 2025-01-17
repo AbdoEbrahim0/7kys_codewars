@@ -1,0 +1,48 @@
+#include<vector>
+using namespace std;
+//{{3, 2, 1, 0}, {4, 6, 5, 3, 2}, {9, 8, 7, 4}}
+long elementsSum(const std::vector<std::vector<int>>& arr, int d = 0) {
+    int sum = 0;
+    int two = arr.size()-1 ;
+    for (vector<int> val : arr)
+    {
+        if (two < val.size())
+        {
+            sum += val.at(two);
+            two--;
+        }
+        else
+        {
+            sum += d;
+            two--;
+        }
+
+    }
+    return sum;
+}
+// long elementsSum(const std::vector<std::vector<int>>& arr, int d = 0) {
+//     long sum = 0;
+//     int size= arr.size();
+//     vector<long> my_indcies;
+//     for (int i = size - 1; i >= 0; i--)
+//     {
+//         my_indcies.push_back( i);
+//     }
+//     int ind = 0;
+//     int i = 0;
+//     for (vector<int> val : arr)
+//     {
+//         ind = my_indcies.at(i);
+//         if (ind< val.size())
+//         {  
+//             sum += val.at(ind);
+//             i++;
+//         }
+//         else
+//         {
+//             sum += d;
+//             i++;
+//         }        
+//     }
+//     return sum;
+// }

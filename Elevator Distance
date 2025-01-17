@@ -1,0 +1,42 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+        //method 1:
+
+// simple examples
+// elevatorDistance([5,2,8]) = 9  5-2=3   8-2=6   8
+// elevatorDistance([1,2,3]) = 2  1-2=-1  3-2=1   2
+// elevatorDistance([7,1,7,1]) = 18     7-1=6   7-1=6    1-7=-6    
+int elevator_distance(std::vector<int> array) {
+    int sum = 0;
+    for (int i = 0; i < array.size()-1; i++)
+    {
+
+        sum += abs(array.at(i) - array.at(i + 1));
+    }
+    return sum;
+}
+int main() {
+    vector<int > vec{ 7,1,7,1 };
+    cout << elevator_distance(vec);
+        return 0;
+}

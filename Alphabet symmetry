@@ -1,0 +1,138 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+        //method 1:
+//std::vector<int> solve(const std::vector<std::string>& arr) {
+//    map<char, int>my_map;
+//    for (int i = 0; i < 26; i++)
+//    {
+//        my_map['a' + i] = i + 1;
+//    }
+//    char selected;
+//    int totalNumbers = 0;
+//    vector<int >out;
+//    for (string val : arr)//O(vector size)
+//    {
+//        for (int index = 0; index < val.size(); index++) //O(String size)
+//        {
+//            selected= val.at(index);
+//            if ((index + 1) == my_map[tolower(selected)]) totalNumbers++;
+//        }
+//        //cout << totalNumbers << " ";
+//        out.push_back(totalNumbers);
+//        totalNumbers = 0;
+//    }
+//    return out;
+//};
+        //method 2:
+//int get_indexPlus1(char c, char str[26])
+//{
+//    int in=0;
+//    for (int z = 0; z < 26; z++)
+//    {
+//        if (c == str[z]) in = z;
+//    }
+//    in++;
+//    return (in);
+//}
+//std::vector<int> solve(const std::vector<std::string>& arr) {
+//    // [a,b,c,d,e,]  ...
+//    char alphabet[26];
+//    for (int k=0;k<sizeof(alphabet)/sizeof(alphabet[0]);k++)
+//    {
+//        alphabet[k] = 'a' + k;
+//    }
+//    int totalnumbers = 0;
+//    vector<int >out;
+//    for (string val : arr)
+//    {
+//        for (int index = 0; index < val.size(); index++)
+//        {
+//            //compar e position of the charcter in WORD and ALPHABET 
+//          if ((index + 1) == get_indexPlus1(tolower(val.at(index)) ,alphabet)) totalnumbers++;
+//        }
+//        cout << totalnumbers << " ";
+//        out.push_back(totalnumbers);
+//        totalnumbers = 0;
+//    }
+//    return out;
+//}
+
+
+        //method 3:
+//std::vector<int> solve(const std::vector<std::string>& arr) {
+//    // [a,b,c,d,e,]  ...
+//    char alphabet[26];
+//    for (int k = 0; k < sizeof(alphabet) / sizeof(alphabet[0]); k++)
+//    {
+//        alphabet[k] = 'a' + k;
+//    }
+//    int totalnumbers = 0;
+//    vector<int >out;
+//    char selected;
+//    for (string val : arr)
+//    {
+//        for (int index = 0; index < val.size(); index++)
+//        {
+//            //compar e position of the charcter in WORD and ALPHABET 
+//            selected = val.at(index);
+//            if ((index + 1) == (tolower(selected) - 'a' + 1)) totalnumbers++;
+//        }
+//        cout << totalnumbers << " ";
+//        out.push_back(totalnumbers);
+//        totalnumbers = 0;
+//    }
+//    return out;
+//}
+//method 4:
+std::vector<int> solve(const std::vector<std::string>& arr) {
+    // [a,b,c,d,e,]  ...
+    char alphabet[26];
+    for (int k = 0; k < sizeof(alphabet) / sizeof(alphabet[0]); k++)
+    {
+        alphabet[k] = 'a' + k;
+    }
+    int totalnumbers = 0;
+    vector<int >out;
+    char selected;
+    for (string val : arr)
+    {
+        for (int index = 0; index < val.size(); index++)
+        {
+            //compar e position of the charcter in WORD and ALPHABET 
+            selected = val.at(index);
+            if (tolower(selected)== alphabet[index]) totalnumbers++;
+        }
+        cout << totalnumbers << " ";
+        out.push_back(totalnumbers);
+        totalnumbers = 0;
+    }
+    return out;
+}
+int main() {
+    
+    //solve({ "IAMDEFANDJKL", "thedefgh", "xyzDEFghijabc" }); // 6, 5, 7
+    solve({ "abide", "ABc", "xyz" }); ///4, 3, 0 
+
+
+        return 0;
+}

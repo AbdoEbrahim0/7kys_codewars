@@ -1,0 +1,49 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+        //method 1:
+
+// input array: [3, -1, -1, -1, 2, 3, -1, 3, -1, 2, 4, 9, 3]  ouptut: 5
+int my_count(vector<int > v, int num)
+{
+    int t = 0;
+    for (int val : v)
+    {
+        if (val == num)
+            t++;
+    }
+    return t;
+}
+unsigned int most_frequent_item_count(const std::vector<int>& collection) {
+    int most=0;
+    for (int val : collection)
+    {
+      if (my_count(collection,val) >most) most= my_count(collection, val);
+    }
+    return most;
+}
+
+int main() {
+    vector<int > vec{ 3, -1, -1, -1, 2, 3, -1, 3, -1, 2, 4, 9, 3 };
+    cout << most_frequent_item_count(vec);
+        return 0;
+}

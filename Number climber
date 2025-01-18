@@ -1,0 +1,89 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+//methode 1 : recurssion
+//bool climbFromRoot(int i, int n, std::vector<int>& v);
+//
+//std::vector<int> climb(int n)
+//{
+//    std::vector<int> res;
+//
+//    climbFromRoot(1, n, res);
+//
+//    return res;
+//}
+//
+//bool climbFromRoot(int i, int n, std::vector<int>& v)
+//{
+//    v.push_back(i);
+//    if (i == n)
+//    {
+//        return true;
+//    }
+//    else if (i > n)
+//    {
+//        return false;
+//    }
+//    else
+//    {
+//        if (!climbFromRoot(i * 2 + 1, n, v))
+//        {
+//            v.pop_back();
+//            if (!climbFromRoot(i * 2, n, v))
+//            {
+//                v.pop_back();
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//}
+
+//methode 2 : recurssion
+//std::vector<int> climb(int n)
+//{
+//    std::vector<int> out;
+//    if (n != 1)      out = climb(n / 2);
+//    out.push_back(n);
+//    return out;
+//}
+std::vector<int> climb(int n)
+{
+    vector<int>vec;
+    //{ 1, 2, 5, 10 };  10   1, 1*2=2      ,2*2 + 1=4+1=5    ,5*2=10
+    // { 1, 3, 6, 13 }  13
+    int res = n;
+    while (true)
+    {
+        res = res / 2;
+        if (res < 1) break;
+        vec.insert(vec.begin(), res);
+    }
+    vec.push_back(n);
+    for (int val : vec) cout << val << " ";
+    return vec;
+}
+int main() {
+    climb(10);
+    
+        return 0;
+}

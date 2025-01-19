@@ -1,0 +1,54 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+ using namespace std;
+    //method 1:
+std::vector<int> evenNumbers(std::vector<int> arr, int n) {
+    
+    vector<int>res; int i = 0;
+    int even;
+    while (n > 0)
+    {
+         even= *(arr.end()-1 - i);
+         if (even % 2 == 0)
+             
+             {
+              res.insert(res.begin(), even);
+              n--;
+             cout<<even<<" ";
+             }
+         i++;    
+    }
+    return res;
+}
+int main() {
+    // cout<<my_pow(5,2);
+    //vector<int>vvv{ 1, 4, 5, 3, 5 };
+    evenNumbers({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 3);
+    // vector<int>vvv {-6 ,-1 ,10 ,-12};
+    // string str="red";
+    // string str="yellow";
+    // cout<<update_light(str);
+
+    // pipe_fix({ 2, 3, 5, 6, 8, 9});
+    
+   return 0;
+}

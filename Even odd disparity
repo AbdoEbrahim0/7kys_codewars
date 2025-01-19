@@ -1,0 +1,48 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+ using namespace std;
+    //method 1:
+    int solve(std::vector<std::string>v){
+    int evens=0,odds=0;
+  //{"0","1","2","3","a","b"}),Equals(0));
+  int element;
+  for (string val :v )
+    {
+      
+    if((val[0]-'0') >=0 && val[0]-'0' <10)
+    {
+      element=stoi(val);
+      if (( element) %2==0)
+      { evens++;}
+    else
+      {odds++;}
+    } 
+  }
+  return evens-odds;
+}
+int main() {
+
+    string s="9";
+    if (s[0]-'0' <9 && s[0]-'0'>=0) cout<<true;  else cout<<false;
+
+   return 0;
+}

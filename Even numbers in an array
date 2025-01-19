@@ -21,23 +21,61 @@
 #include <array>
  using namespace std;
     //method 1:
+// std::vector<int> evenNumbers(std::vector<int> arr, int n) {
+//     vector<int>res; int i = 0;
+//     int even;
+//     auto x = arr.rbegin();
+//     cout<<*x<<" ";
+//     while (n > 0)
+//     {
+//          even= *(arr.end()-1 - i);
+//          if (even % 2 == 0)             
+//              {
+//               res.insert(res.begin(), even);
+//               n--;
+//              cout<<even<<" ";
+//              }
+//          i++;    
+//     }
+//     return res;
+// }
+    //method 2:
+// std::vector<int> evenNumbers( std::vector< int > a, int n ) {
+//   std::vector< int > v( n );
+//   for ( auto i{ a.size()-1 }; n; --i )
+//     if (!( a[ i ] & 1 )) v[ --n ] = a[ i ];
+//   return v;
+// }
+    //method 3:
+// vector<int> evenNumbers(vector<int> arr, int n) {
+//   vector<int> evens; // [2, 4, 6, 8] => Just Three Numbers
+//   for (int i = 0; i < arr.size(); i++)
+//   {
+//     if (arr[i] % 2 == 0)
+//     {
+//       evens.push_back(arr[i]);
+//     }
+//   }
+//   vector<int> result(evens.end() - n, evens.end()); // [4, 6, 8]
+//   return result;
+// }
+//     //method 4:
+// std::vector<int> evenNumbers(std::vector<int> arr, int n) {
+//     std::vector<int> res = {};
+//     for (std::vector<int>::iterator it = arr.end()-1; n > 0; --it)
+//         if (*it % 2 == 0) {
+//             res.insert(res.begin(), *it);
+//             --n;
+//         }
+//     return res;
+// }
+    //method 5:
 std::vector<int> evenNumbers(std::vector<int> arr, int n) {
-    
-    vector<int>res; int i = 0;
-    int even;
-    while (n > 0)
-    {
-         even= *(arr.end()-1 - i);
-         if (even % 2 == 0)
-             
-             {
-              res.insert(res.begin(), even);
-              n--;
-             cout<<even<<" ";
-             }
-         i++;    
-    }
-    return res;
+  using namespace std;
+  vector<int> evens, result;
+  copy_if(arr.begin(), arr.end(), back_inserter(evens), [](int i){return i % 2 == 0;});
+  copy(evens.begin() + evens.size() - n, evens.end(), back_inserter(result));
+  return result;
 }
 int main() {
     // cout<<my_pow(5,2);

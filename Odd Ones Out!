@@ -1,0 +1,152 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <unordered_map> 
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+ using namespace std;
+
+    //method 1:
+// bool foundEven(const std::vector<int> vec ,int num) {
+// int count=0;
+// bool always = false;
+//   for (int value:vec)
+//   {
+//     //cout<<"\n"<<value<<" : "<< num<<"\n";    
+//    if (value==num) count ++;
+//    //cout<<count<<" \n";
+//   } 
+//   if (count %2 ==0) 
+//     always= true ;
+// return always;
+// }  
+// //{1, 1, 2, 2, 3, 3, 3}) = {1, 1, 2, 2}
+// std::vector<int> oddOnesOut(const std::vector<int>& numbers) {
+//   // your code here
+//   vector <int>res;
+//   for (int v:numbers)
+//   {
+//     // cout<<"current num we step on : "<<v<<" ";
+//     if (foundEven(numbers,v))
+//     {
+//       res.push_back(v);
+//     }
+//   }
+//   return res;
+// }
+//methode 2
+// bool foundOdd(const std::vector<int>& vec, int num) {
+//     int count = count_if(vec.begin(), vec.end(), [num](int value) { return value == num; });
+//     return count % 2 != 0;
+// }
+// std::vector<int> oddOnesOut(const std::vector<int>& numbers) {
+//   // your code here
+//   vector <int>res;
+//   for (int v:numbers)
+//   {
+//     // cout<<"current num we step on : "<<v<<" ";
+//     if ( ! foundOdd(numbers,v) )
+//     {
+//       res.push_back(v);
+//     }
+//   }
+//   for (int va:res) cout<<va<<" ";
+//   return res;
+// }
+
+//methode  3
+// bool foundOdd(std::vector<int> vec ,int num) {
+// int count=0;
+// bool always = false;
+//   for (int value:vec)
+//   {
+//     cout<<"\n"<<value<<" : "<< num<<"\n";    
+//    if (value==num) count ++;
+//    cout<<count<<" \n";
+//   } 
+//   if (count %2 !=0) 
+//     always= true ;
+// return always;
+// }
+// std::vector<int> oddOnesOut(const std::vector<int>& numbers) {
+//   // your code here
+//   vector <int>copy(numbers);
+//   copy.erase(remove_if(copy.begin(),copy.end(),[&numbers](int val){return foundOdd(numbers,val); }   ) ,copy.end());
+//   for (int va:copy) cout<<va<<" ";
+//   return copy;
+// }
+//metode 4
+// vector<int> oddOnesOut(const vector<int>& numbers) {
+//     unordered_map<int, int> frequency; // Map to store the count of each number    
+//     // Step 1: Count occurrences of each number
+    
+//     for (int num : numbers) {
+//         frequency[num]++;
+//     }
+//     cout<<frequency[5]; //0 as it is not exist in map
+//     // Step 2: Create a new vector with numbers that have even occurrences
+//     vector<int> result;
+//     for (int num : numbers) {
+//         if (frequency[num] % 2 == 0) {
+//             result.push_back(num); // Add only numbers with even occurrences
+//         }
+//     }   
+//       for (int va:result) cout<<va<<" ";
+//           return result;
+//     return result;
+// }
+//metode 5
+// vector<int> oddOnesOut(vector<int> numbers) {
+//     // Step 1: Sort the vector to group identical elements
+//     sort(numbers.begin(), numbers.end());
+//     vector<int> result;
+//     int i = 0;
+//     // Step 2: Iterate through the sorted vector and count occurrences
+//     while (i < numbers.size()) {
+//         int count = 1;
+//         // Count occurrences of the current number
+//         while (i + count < numbers.size() && numbers[i + count] == numbers[i]) {
+//             count++;
+//         }
+//         // If count is even, add all occurrences to the result
+//         if (count % 2 == 0) {
+//             result.insert(result.end(), count, numbers[i]);
+//         }
+//        // Move to the next distinct number
+//         i += count;
+//     }
+//     return result;
+// }
+//methode 6
+vector<int> oddOnesOut(const vector<int>& numbers) {
+  vector<int> result;
+  for (int num : numbers) {
+    if ( count(numbers.begin(), numbers.end(), num) % 2 == 0) // Even Number
+    {
+      result.push_back(num);
+    }
+  }
+  return result;
+}
+int main() {
+  // vector<int >my_vec={1, 1, 2, 2, 3, 3, 3};
+  vector<int >my_vec={42, 72, 32, 4, 94, 82, 67, 67,1,1,1};  
+    oddOnesOut(my_vec); 
+   return 0;
+}

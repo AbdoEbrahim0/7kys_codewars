@@ -1,0 +1,59 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <unordered_map> 
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+ using namespace std;
+
+    //method 1:
+std::string to24HourTime(int hour, int minute, const std::string& period) {
+  string res="";
+  // if (hour==12  && period=="pm") hour=12;
+  if(hour !=12 && period=="pm") hour+=12;
+  else if (hour==12  && period=="am") hour =0;
+  // else if(hour !=12 && period=="am") hour=hour;
+
+  string convert_hour=to_string(hour);
+  convert_hour.size()>1? res+=convert_hour :res="0"+convert_hour;
+
+  string convert_min=to_string(minute);
+  convert_min.size()>1? res+=convert_min :res+="0"+convert_min;
+
+  return res;
+}
+std::string to24HourTime(int hour, int minute, const std::string& period) {
+  string res="";
+  // if (hour==12  && period=="pm") hour=12;
+  if(hour !=12 && period=="pm") hour+=12;
+  else if (hour==12  && period=="am") hour =0;
+  // else if(hour !=12 && period=="am") hour=hour;
+  
+  if (hour<10) res+="0";
+  res+=to_string(hour);
+  
+  if (minute<10)  res+="0";
+  res+=to_string(minute);
+  return res;
+}
+int main() {
+  // vector<int >my_vec={1, 1, 2, 2, 3, 3, 3};
+  cout<< to24HourTime(1, 0, "am");
+   return 0;
+}

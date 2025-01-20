@@ -21,28 +21,81 @@
 #include <array>
  using namespace std;
     //method 1:
-    int solve(std::vector<std::string>v){
-    int evens=0,odds=0;
-  //{"0","1","2","3","a","b"}),Equals(0));
-  int element;
-  for (string val :v )
-    {
-      
-    if((val[0]-'0') >=0 && val[0]-'0' <10)
-    {
-      element=stoi(val);
-      if (( element) %2==0)
-      { evens++;}
-    else
-      {odds++;}
-    } 
-  }
-  return evens-odds;
+//     int solve(std::vector<std::string>v){
+//     int evens=0,odds=0;
+//   //{"0","1","2","3","a","b"}),Equals(0));
+//   int element;
+//   for (string val :v )
+//     {  
+//     if((val[0]-'0') >=0 && val[0]-'0' <10)
+//     {
+//       element=stoi(val);
+//       if (( element) %2==0)
+//       { evens++;}
+//     else
+//       {odds++;}
+//     } 
+//   }
+//   return evens-odds;
+// }
+    //method 2:
+// int solve(vector<string> v) {
+//   int result = 0;
+//   for (string str : v)
+//   {
+//     if (isdigit(str.front()))
+//     {
+//       if (stoi(str) % 2 == 0)
+//       {
+//         result++;
+//       }
+//       else
+//       {
+//         result--;
+//       }
+//     }
+//   }
+//   return result;
+// }
+//methode 3
+// int solve(std::vector<std::string>v){
+//     int a = 0;
+//     for (std::string s : v)
+//         if(isdigit(s[0]))
+//             stoi(s) % 2 == 0 ?  a++ : a--;             
+//     return a;
+// }
+
+// int solve(vector<string>v){
+//   int even, odd = even = 0;
+// 	for (int i = 0; i < v.size(); i++)
+// 	{
+// 		if (v[i] >= "a" && v[i] <= "z")
+// 			continue;
+//    ((stoi(v[i])) % 2 == 0) ? even++ : odd++;
+// 	}
+// 	return even - odd;
+// }
+
+// int solve(std::vector<std::string>v){
+//   return std::accumulate(begin(v),
+//                          end(v),
+//                          0,
+//                          [](auto s, auto e) {return s + (isdigit(e[0]) ? (stoi(e)%2 ? -1 : 1) : 0);});
+// }
+
+int solve(std::vector<std::string>v, int even = 0)
+{
+  v.erase(remove_if(v.begin(), v.end(), [](std::string a) -> bool { return !std::isdigit(a[0]); }), v.end());
+  return ((even = std::accumulate(v.cbegin(), v.cend(), 0, [](int a, std::string b) -> int { return (a += !(stoi(b) % 2)); })) - (v.size() - even));
 }
 int main() {
 
-    string s="9";
-    if (s[0]-'0' <9 && s[0]-'0'>=0) cout<<true;  else cout<<false;
-
+    string s="10";
+    // if (s[0]-'0' <9 && s[0]-'0'>=0) cout<<true;  else cout<<false;
+  cout<< isdigit(s.front());
+    // cout<<stoi("a");
+    //vector<int>vvv{ 1, 4, 5, 3, 5 };
+    
    return 0;
 }

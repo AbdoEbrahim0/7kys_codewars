@@ -1,0 +1,120 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+ using namespace std;
+
+    //method 1:
+// std::vector<int> digits(int n){
+//   //Code Here...
+//   int copy_n=n;
+//   int digits_count=0;
+//   vector<int>digitnumber; //302     302/10= 30.2=30     30/10=3    3/10=0.3=0  then it is 3 didgits
+//   while (copy_n>0)
+//   {
+//     copy_n=copy_n/10;
+//     digits_count++; //How Many number of digits
+//   }
+
+//   // cout<<copy_n<< " + " <<--digits_count<<endl;
+//   int temp;
+//   int digits_count_temp=digits_count;
+//   for (int i=0;i<digits_count_temp;i++)  //0th 1st 2nd    iterate 3 times
+//   {
+//     temp=n/pow(10,--digits_count);
+//     // cout<<temp<<" ";  //3   0   2
+//     digitnumber.push_back(temp);
+//     n=n-(pow(10,digits_count) *temp);
+//   }
+//   vector <int> possible_sum_of_two_digits;
+//   int sum=0;
+//   for (int i=0; i<digitnumber.size() ;i++)
+//   {
+//     for (int j=i+1; j<digitnumber.size();j++)
+//     {
+//       sum+=digitnumber.at(i)+digitnumber.at(j);
+//       // sum=accumulate(&digitnumber.at(i),&digitnumber.at(j),sum);
+//       cout<<sum<<" ";
+//       possible_sum_of_two_digits.push_back(sum);
+//       sum=0;
+//     }
+//   }
+//   return possible_sum_of_two_digits;
+// }
+
+//methode 2
+// std::vector<int> extractDigits(int n) {
+//     std::vector<int> digitnumber;
+//     while (n > 0) {
+//         digitnumber.push_back(n % 10); // Extract last digit
+//         n /= 10;                      // Remove last digit
+//     }
+//     std::reverse(digitnumber.begin(), digitnumber.end()); // Maintain original order
+//     return digitnumber;
+// }
+// std::vector<int> digits(int n) {
+//     // Extract digits
+//     std::vector<int> digitnumber = extractDigits(n);
+//     std::vector<int> possible_sum_of_two_digits; // Calculate possible sums of two digits
+//     for (size_t i = 0; i < digitnumber.size(); i++) {
+//         for (size_t j = i + 1; j < digitnumber.size(); j++) {
+//             possible_sum_of_two_digits.push_back(digitnumber[i] + digitnumber[j]);
+//         }
+//     }
+//     return possible_sum_of_two_digits;
+// }
+//methode 3
+vector<int> digits(int n) {
+  string str = to_string(n);
+  vector<int> result;
+  for (int i = 0; i < str.size(); i++) // 1 2 3 4 5
+  {
+    for (int j = i + 1; j < str.size(); j++) // [2] => 3 4 5
+    {
+      result.push_back((str[i] - 48) + (str[j] - 48));
+    }
+  }
+  return result;
+}
+//methode 4
+std::vector<int> digits(int n) {
+	
+	std::string ds = std::to_string(n);
+	std::vector<int> ret_vec;
+	for (auto i = ds.begin(); i < ds.end(); ++i)
+	{
+		for (auto j = i + 1; j < ds.end(); ++j)
+		{
+			ret_vec.push_back((*i + *j)-96);
+		}
+	}
+
+	return ret_vec;
+}
+int main() {
+
+    // string s="10";
+    // if (s[0]-'0' <9 && s[0]-'0'>=0) cout<<true;  else cout<<false;
+  digits(302);
+    // cout<<stoi("a");
+    //vector<int>vvv{ 1, 4, 5, 3, 5 };
+    
+   return 0;
+}

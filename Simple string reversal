@@ -1,0 +1,125 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <unordered_map> 
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+ using namespace std;
+
+    //method 1:
+        // Assert::That(solve("codewars"), Equals("srawedoc"));
+//         Assert::That(solve("your code"),Equals("edoc ruoy"));
+// std::string solve(string s){
+//     //..
+//     vector<int >idx;
+//     for (int i=0;i<s.size();i++)
+//     {
+//         if(s[i] ==' ')
+//         { idx.emplace_back(i);}
+//     }
+//     string ss="";
+//     for (int i=s.size()-1;i>=0;i--)
+//     {
+//         if(s[i] !=' ' )
+//         ss+=s[i];
+//     }
+//     for (int i=0;i<idx.size();i++)
+//       ss.insert(ss.begin() +idx.at(i),' ');
+//     return ss;
+// }
+//methode 2
+/*
+std::string solve(const string& s) {
+    string reversed = ""; // Result string to hold reversed characters
+    int n = s.size();     // Length of the input string
+    // Traverse the string backward and skip spaces
+    for (int i = n - 1; i >= 0; i--) {
+        if (s[i] != ' ') { // Add non-space characters
+            reversed += s[i];
+        }
+    }
+    // Build the final string, re-inserting spaces at their original positions
+    string result = "";
+    int reversedIndex = 0;
+    for (int i = 0; i < n; i++) {
+        if (s[i] == ' ') {
+            result += ' '; // Add a space at the original position
+        }
+        else {
+            result += reversed[reversedIndex++]; // Add the next reversed character
+        }
+    }
+    return result;
+}
+*/
+//methode 3
+/*
+string solve(string s) {
+  string reversed; // Length 9
+  for (int i = s.length() - 1; i >= 0; i--)
+  {
+    if (s[i] != ' ')
+    {
+      reversed += s[i];
+    }
+    if (s[reversed.length()] == ' ')
+    {
+      reversed += ' ';
+    }
+  }
+  return reversed; // skco edoc 
+}
+*/
+/*
+std::string solve(std::string s){
+  size_t l{}, r{s.size() - 1};
+  while(l < r){
+    while(s[l] == ' ') ++l;
+    while(s[r] == ' ') --r;
+    std::swap(s[l], s[r]);
+    ++l;
+    --r;
+  }
+  return s;
+}
+*/
+
+
+std::string solve(string s){
+    string res = "";
+    for (auto i = s.rbegin(); i != s.rend(); ++i)
+    {
+        if (*i == ' ')
+            continue;
+        else {res.push_back(*i);}
+    }
+    for (auto i = s.begin(); i != s.end(); ++i)
+    {
+        if (*i == ' ')
+            res.insert(res.begin() + (i - s.begin()), ' ');
+    }
+    return res;
+}
+int main() {
+  // vector<int >my_vec={1, 1, 2, 2, 3, 3, 3};
+  cout<< solve("codewars")<<endl; //srawedoc
+  cout<< solve("your code")<<endl; //edoc ruoy
+  cout<< solve("your code rocks")<<endl; //skco redo cruoy
+   return 0;
+}

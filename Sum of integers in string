@@ -1,0 +1,143 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+//methode 1 : 
+//       Assert::That(sumOfIntegers("12.4"),                       Equals(16));
+//       Assert::That(sumOfIntegers("h3ll0w0rld"),                 Equals( 3));
+//       Assert::That(sumOfIntegers("2 + 3 = "),                   Equals( 5));
+//       Assert::That(sumOfIntegers("C4t5 are 4m4z1ng."),          Equals(18));
+//       Assert::That(sumOfIntegers("Dogs are our best friends."), Equals( 0));
+
+//int sumOfIntegers(const std::string& str) {
+//    string intoNum;
+//    int sum = 0;
+//    int i = 0;
+//    int checkHownManyDigits = 0;
+//    while(true)
+//    {
+//       // cout << str[checkHownManyDigits] << " ";
+//        while (str[checkHownManyDigits] >= '0' && str[checkHownManyDigits] <= '9')
+//        {
+//            intoNum += str[checkHownManyDigits];
+//            checkHownManyDigits++;
+//        }
+//        if(checkHownManyDigits>0)
+//        if (str[checkHownManyDigits-1] >= '0' && str[checkHownManyDigits-1] <= '9')
+//        {
+//            sum += stoi(intoNum);
+//            intoNum = "";
+//        }
+//        checkHownManyDigits++;
+//        //i+=1 + checkHownManyDigits;
+//        if (checkHownManyDigits >= str.size())
+//            break;
+//    }
+//    return sum;
+//}
+        //methode 2:
+//int sumOfIntegers(const string& str) {
+//    int result = 0; // 
+//    int currentnum = 0; // 91
+//
+//    for (char ch : str)
+//    {
+//        if (isdigit(ch))// 0:9 >> true   a:z>>false
+//        {
+//            currentnum = currentnum * 10 + (ch - '0'); // 91 * 10 = 910 + (4) = 914  //0+ 9  90+1 
+//        }
+//        else
+//        {
+//            result += currentnum;
+//            currentnum = 0;
+//        }
+//    }
+//    result += currentnum;
+//    return result;
+//}
+        //methode 3
+//int sumOfIntegers(const string& str)
+//{
+//    int result = 0;
+//    string temp = "0";
+//    for (char i : str)
+//    {
+//        if (isdigit(i))
+//            temp += i;
+//        else
+//        {
+//            result += stoi(temp); // 0
+//            temp = "0";
+//        }
+//    }
+//    result += stoi(temp);
+//    return result;
+//}
+    //methode 4
+//int sumOfIntegers(const std::string& str) {
+//    int res = 0;
+//    for (int i = 0; i < str.length(); i++)
+//    {
+//        if (isdigit(str[i]) && !isdigit(str[i + 1]))// if value inside the index i is a number 
+//        {
+//            res += str[i] - '0'; // b3mlo - '0' aw - 48 aly hwa al ascii value bta3 al '0' 34an atl3 al number bkam
+//        }
+//        else if (isdigit(str[i]) && isdigit(str[i + 1])) // msln fe rgm 914
+//        {
+//            int j = i + 1;
+//            int x = str[i] - '0'; // x = 9  
+//            while (isdigit(str[j]))// str[j] = 1   => str[j] = 4   => str[j] not a number so break the loop
+//            {
+//                x *= 10; // x=90    =>  x = 910
+//                x += str[j] - '0'; // x= 90 + 1 = 91   => x= 910 + 4 = 914
+//                j++;
+//                i++;// bzwd al i 34an  lma al i = 9 ana khlas 3det al 914 fa bzwd al i 34an a3dehom mn al loop
+//            }
+//            res += x;
+//        }
+//    }
+//    return res;
+//}
+//methode 5
+int sumOfIntegers(const std::string& str)
+{
+    int d = 0, sum = 0;
+    for (size_t i = 0; i < str.size(); ++i)
+    {
+        if (std::isdigit(str[i])) d = 10 * d + (str[i] - '0');
+        if (!std::isdigit(str[i]) || (i == str.size() - 1 && std::isdigit(str[i])))
+        {
+            sum += d;
+            d = 0;
+        }
+    }
+    return sum;
+}
+int main() {
+    /*
+    cout << sumOfIntegers("The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog");  //3635
+    cout << sumOfIntegers("C4t5 are 4m4z1ng."); //18
+    cout << sumOfIntegers("12.4"); //16
+    */
+    //cout << sumOfIntegers("91"); //16
+    cout << isdigit('z'); 
+    return 0;
+}

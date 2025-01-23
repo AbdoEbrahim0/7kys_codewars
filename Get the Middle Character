@@ -1,0 +1,35 @@
+using namespace std;
+#include <string>
+/*
+std::string get_middle(std::string input)
+{
+    string res;
+    int size = input.size();
+    if (size < 1) return "";
+    if (size & 1) //odd
+        res += input[size / 2];
+    else
+    {
+        int mid = size / 2;
+        res += input[mid-1];
+        res += input[mid];
+    }
+    return res;
+}
+*/
+//std::string get_middle(std::string input)
+//{
+//    string res;
+//    int size = input.size();
+//    if (size < 1) return "";
+//    if (size & 1) //odd
+//        res=input.substr(size/2, 1);
+//    else
+//        res = input.substr(size / 2 -1,2);
+//    return res;
+//}
+//methode 2 
+std::string get_middle(std::string input)
+{
+    return { input.begin() + (input.size() + 1) / 2 - 1, input.end() - (input.size() + 1) / 2 + 1 };
+}

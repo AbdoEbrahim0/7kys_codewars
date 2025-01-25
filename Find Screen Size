@@ -1,0 +1,91 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+    //methode 1 : this methode has problem in random large test case
+/*std::string find_screen_height(int width, const std::string& ratio)
+{
+    string height,w;
+    float num ,num_2;
+    int afterSymbol=0;
+    for (int z = 0; z < ratio.size(); z++)
+    {
+        if (ratio[z] != ':') height += ratio[z]; else { afterSymbol = z; break; } 
+    }
+    for (; afterSymbol < ratio.size();)
+    {
+        afterSymbol++;
+        w += ratio[afterSymbol];
+    }
+    (height.size() >= 2) ? num = stof(height) : num = ratio[0] - '0';
+    (w.size() >= 2) ? num_2 = stof(w): num_2 = ratio[0] - '0';
+    return to_string(width) + "x"+ to_string( int((width / num) * num_2) ) ; //to make sure return floor value without dicimals
+}*/
+    //methode 2
+//string find_screen_height(int width, const string& ratio)
+//{
+//    int i = ratio.find(":");
+//    int wratio = stoi(ratio.substr(0, i)); // 4
+//    int hratio = stoi(ratio.substr(i + 1)); // 3
+//    int height = (width * hratio) / wratio;
+//    return to_string(width) + "x" + to_string(height);
+//
+//}
+        // methode 3
+//string find_screen_height(int width, const string& ratio)
+//{
+//    int n = stoi(ratio), d = stoi(ratio.substr(ratio.find(':') + 1));
+//    cout << n << "\n"; cout << d << "\n";
+//    return to_string(width) + "x" + to_string(width * d / n);
+//}
+    // methode 4
+string find_screen_height(int width, const string& ratio)
+{
+    int temp = 0; int ht = 0;
+    for (char ch : ratio)
+    {
+        if (isdigit(ch) == 1)
+        {
+            temp = temp * 10 + (ch - 48);
+        }
+        else { ht = temp; temp = 0; }//happen once only because there is : 
+    }
+    auto num = temp * width / ht;
+    string st = to_string(width) + 'x' + to_string(num);
+    return st;
+}
+std::string find_screen_height(const int width, const std::string& ratio) {
+    const auto mid = std::find(ratio.cbegin(), ratio.cend(), ':');
+    const double rw = std::stoi(std::string{ ratio.cbegin(), mid });
+    const double rh = std::stoi(std::string{ mid + 1, ratio.cend() });
+    
+    return 
+      std::to_string(width) + 'x' + 
+      std::to_string(static_cast<int>(width / rw * rh));
+}
+
+int main() {
+    //cout << find_screen_height(1024, "4:3"); //ab 
+    //cout << find_screen_height(1280, "16:9"); //(1280, "16:9", "1280x720");
+    //cout << find_screen_height(441, "4:3");  //441/4 *3 110.25*3  330.75  expected: 330
+    cout << find_screen_height(1924, "16:9"); //1924  ratio : 16 : 9  1924/4 *3  120.25*9  expected 1082  not 1080
+    return 0;
+}

@@ -1,0 +1,92 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+using namespace std;
+    //methode 1 : this methode has problem in random large test case
+#include <utility>
+
+//std::pair<std::string, std::string> capitalize(const std::string& s)
+//{
+//    string odd, even;
+//    for (int i=0;i<s.size();i++)
+//    {
+//        if (i % 2 == 1)
+//        {
+//            odd += toupper(s[i]) ;
+//        }else
+//            odd += s[i];
+//        
+//        if(i % 2 == 0)
+//        {
+//            even += toupper(s[i]);
+//        }
+//        else
+//        {
+//            even += s[i];
+//        }
+//    }
+//    return { even,odd };
+//}
+
+std::pair<std::string, std::string> capitalize(const std::string& s)
+{
+    string odd, even;
+    for (int i = 0; i < s.size(); i++)
+    {
+        if (i % 2 == 1)
+        {
+            odd += toupper(s[i]);
+        }
+        else
+            odd += s[i];
+
+        if (i % 2 == 0)
+        {
+            even += char(int (s[i])-(32)) ;
+        }
+        else
+        {
+            even += s[i];
+        }
+    }
+  
+    // return { even,odd };
+pair<string, string>my_pair;
+    my_pair.first = even; my_pair.second = odd;
+    return my_pair;
+}
+
+std::pair<std::string, std::string> capitalize(const std::string& s, bool flipflop = false)
+{
+    std::pair<std::string, std::string> p(s, s);
+    for (size_t x = 0; x < s.length(); x++)
+        if ((flipflop = !flipflop)) //first time = true second = false 3rd =true
+            p.first[x] = std::toupper(p.first[x]);
+        else
+            p.second[x] = std::toupper(p.second[x]);
+    return p;
+}
+int main() {
+    cout << capitalize("abcdef").first << endl;
+    cout << capitalize("abcdef").second;
+    
+    return 0;
+}

@@ -1,0 +1,61 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+#include <regex>
+#include <string>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+using namespace std;
+    //methode 1 : this methode has problem in random large test case
+bool validParentheses(const std::string& str) {
+    int open = 0, close = 0; int openIsPostive_closeIsNegative=0;
+    int sizeOfInput = str.size();
+    if (sizeOfInput &1 ==1 )
+    return false;
+    else
+    {
+        for (char c : str)
+        {
+            if (c == '(') { open++;  }
+            else if (c == ')') { close++; }
+        }
+    }
+    if (open == close) //if even  ()() return true if not return false 
+    {
+        for (int i=0;i< sizeOfInput;i++)
+        {
+            // )(())) consider open Parentheses as postive increament and close as negative increament 
+            //it only will be true if sum was postive before reach last element and false if sum was negative
+            if (openIsPostive_closeIsNegative < 0)
+            { return false; }
+            if (str[i] == '(') openIsPostive_closeIsNegative++;
+            else if (str[i] == ')') openIsPostive_closeIsNegative--;
+            
+        }
+        return true;
+    }
+    return false;
+}
+int main() {
+
+    cout<< validParentheses("((()))");
+    cout << validParentheses(")(()))");
+
+    
+    return 0;
+}

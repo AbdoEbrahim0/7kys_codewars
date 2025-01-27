@@ -1,25 +1,7 @@
 #include <cmath>
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <cassert>
-#include <string>
-#include <algorithm>
-#include <cstring>
-#include <stdio.h>
-#include <vector>
 #include <regex>
 #include <string>
-#include <numeric>
-#include <stdlib.h>
-#include <map>
-#include <numeric>
-#include<sstream>
-#include <set>
-#include <cstdint>
-#include <array>
-#include <utility>
+
 using namespace std;
     //methode 1 : this methode has problem in random large test case
 bool validParentheses(const std::string& str) {
@@ -50,6 +32,74 @@ bool validParentheses(const std::string& str) {
         return true;
     }
     return false;
+}
+
+// methode 2
+bool validParentheses(const std::string& str) {
+    int openIsPostive_closeIsNegative = 0;
+    int sizeOfInput = str.size();
+    if (sizeOfInput & 1 == 1) // if odd ofcourse it will be false 
+        return false;
+    else
+    {
+        for (char c : str)
+        {
+            if (c == '(') { openIsPostive_closeIsNegative++; }
+            else if (c == ')') { openIsPostive_closeIsNegative--; }
+        if (openIsPostive_closeIsNegative < 0 )
+            return false;
+        } 
+    }
+  //in case of '((' or '))'
+      if (openIsPostive_closeIsNegative < 0 || openIsPostive_closeIsNegative >1 ) 
+        {
+            return false;
+        }
+    return true;
+}
+//methode 3
+bool validParentheses(const string& str) {
+  int result = 0;
+  
+  for (char ch : str)
+  {
+    if (ch == '(')
+    {
+      result++;
+    }
+    else
+    {
+      result--;
+    }
+    if (result < 0) return false;
+  }
+  
+  return !result; // 0 => False !0 => True
+}
+//methode 5
+bool validParentheses(const std::string& str) {
+  try {
+    return std::regex{str}, true;
+  } catch (std::regex_error) {
+    return false;
+  }
+}
+//methode 5
+bool validParentheses(const std::string& str) {
+  int Open=0; int Close=0;
+  for(int x=0;x<str.size();x++)
+    {
+    if(str[x]=='(') Open ++;
+      
+    if(str[x]==')') Close ++;
+
+    if(Close>Open) return false;
+    
+    if(x==str.size()-1)
+     if(Open==Close) return true;
+      else return false;
+    }
+  return true;
 }
 int main() {
 

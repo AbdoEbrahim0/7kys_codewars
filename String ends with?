@@ -1,0 +1,33 @@
+#include <string>
+using namespace std;
+//methode 1
+bool solution(std::string const& str, std::string const& ending) {
+    int sizeOfEnd = ending.size();
+    int sizeOfStr = str.size();
+    if(sizeOfEnd>sizeOfStr ) return false;
+    int z = 0;
+    for (int i = sizeOfStr  - sizeOfEnd; i < sizeOfStr; i++)
+    {
+        if (str[i] != ending[z++]) return false;
+    }
+    return true;
+}
+//If the substring of str from str.size() - ending.size() to the end matches ending, 
+//compare() will return 0. Otherwise, it returns a non-zero value.
+//The == 0 checks whether the result of compare() is zero, meaning the strings match.
+//methode 2
+bool solution(const std::string& str, const std::string& ending) {
+  return str.size() >= ending.size() && str.compare(str.size() - ending.size(), std::string::npos, ending) == 0;
+}
+//methode 3
+bool solution(std::string const &str, std::string const &ending) {
+    return std::equal(ending.rbegin(), ending.rend(), str.rbegin());
+}
+//methode 4
+bool solution(std::string const &str, std::string const &ending) {
+    return (std::string(str.end() - ending.size(), str.end()) == ending);
+}
+//methode 5
+bool solution(std::string const &str, std::string const &ending) {
+    return str.size() < ending.size() ? false : std::string_view{str}.substr(str.size() - ending.size()) == ending;
+}

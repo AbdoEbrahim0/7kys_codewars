@@ -1,0 +1,17 @@
+#include <vector>
+using namespace std;int save(std::vector<int> sizes, int hd) {
+    int count = 0;
+    int current;
+    for (int i = 0; i < sizes.size(); i++)
+    {
+        if (hd >= sizes[i])
+        {
+            hd = hd - sizes[i];
+            count++;
+        }
+        else break;
+    
+    }
+    
+    return count;
+}

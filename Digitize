@@ -1,0 +1,50 @@
+#include <vector>
+using namespace std;
+// std::vector<int> digitize(int n) {
+//     if(n==0) return {0};
+//     int numOfDigits = 0 , copyOfN = n;;
+//     while (copyOfN >0)
+//     {
+//         copyOfN = copyOfN / 10;
+//         numOfDigits++;   
+//     }
+    
+//     int temp,digit;
+//     vector<int> my_vec;
+//     for (int i = 0; i < numOfDigits; i++)
+//     {
+//         temp = n / 10; //30
+//         digit = n - temp * 10;  //2
+//         my_vec.push_back(digit);
+//         n = temp;
+//         //cout << digit<<" ";
+//     }
+//     reverse(my_vec.begin(), my_vec.end());
+//     return my_vec;
+// }
+std::vector<int> digitize(int n) {
+        vector<int> my_vec;
+    string my_in = to_string(n);
+  // for (int i = 0; i < my_in.size(); i++)
+  //  {
+  //      my_vec.push_back(my_in[i]-48);
+  //       cout << my_in[i] - 48 <<" ";
+  //    }
+for(auto i: std::to_string(n)) {
+    my_vec.push_back(i - '0');
+  }
+    return my_vec;
+}
+//better way to implement 1st methode
+std::vector<int> digitize(const int& n) {
+  if(!n)
+    return std::vector<int>{0};
+  std::vector<int> arr;
+  int m = n;
+  while(m){
+    arr.push_back(m % 10);
+    m /= 10;
+  }
+  std::reverse(arr.begin(), arr.end());
+  return arr;
+}

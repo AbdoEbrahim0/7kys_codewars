@@ -127,6 +127,15 @@ long long reverseNumber(long long n) {
     return sum;
     return -sum;
 }
+//methode 6
+long long reverseNumber(long long n) {
+  long long x = 0;
+  while(n != 0){
+    x = x * 10 + n % 10;
+    n /= 10;
+  }
+  return x;
+}
 int main() {
     cout<< reverseNumber(-1234);
     return 0;

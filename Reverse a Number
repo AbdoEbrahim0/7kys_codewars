@@ -1,0 +1,133 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+using namespace std;
+    //methode 1 :
+//std::vector<int> digitize(int n) {
+//    
+//    int numOfDigits = 0 , copyOfN = n;;
+//    while (copyOfN >0)
+//    {
+//        copyOfN = copyOfN / 10;
+//        numOfDigits++;   
+//    }
+//    
+//    int temp,digit;
+//    vector<int> my_vec;
+//    for (int i = 0; i < numOfDigits; i++)
+//    {
+//        temp = n / 10; //30
+//        digit = n - temp * 10;  //2
+//        my_vec.push_back(digit);
+//        n = temp;
+//        //cout << digit<<" ";
+//    }
+//    reverse(my_vec.begin(), my_vec.end());
+//    return my_vec;
+//}
+
+std::vector<int> digitize(int n) {
+        vector<int> my_vec;
+    string my_in = to_string(n);
+    for (int i = 0; i < my_in.size(); i++)
+    {
+        my_vec.push_back(my_in[i]-48);
+        cout << my_in[i] - 48 <<" ";
+    }
+    return my_vec;
+}
+
+//long long reverseNumber(long long n) {
+//    string my_s = to_string(n);
+//    if (n >= 0)
+//    {
+//        reverse(my_s.begin(), my_s.end());
+//    }
+//    else
+//    {
+//        reverse(my_s.begin()+1, my_s.end());   
+//    }
+//    cout << my_s;
+//    return stol(my_s);
+//}
+        //methode 2 
+//long long reverseNumber(long long n) {
+//    string my_s = to_string(n),res;
+//    if (n < 0) my_s  =string(my_s.begin() + 1, my_s.end());
+//    for (int i = my_s.size() -1 ; i >=0  ; i--)
+//    {
+//        res+=my_s[i];   
+//    }
+//    if (n>0)  return stol(res);
+//    return -stol(res);
+//}
+        //methode 3 
+//long long reverseNumber(long long n) {
+//
+//    int numOfDigits = 0, copyOfN; bool negative = false;
+//    if (n < 0) { negative = true; n = -n; }
+//    copyOfN = n;
+//        while (copyOfN >0)
+//        {
+//            copyOfN = copyOfN / 10;
+//            numOfDigits++;   
+//        }
+//        int temp,digit;
+//        string my_out;
+//        for (int i = 0; i < numOfDigits; i++)
+//        {
+//            temp = n / 10; //30
+//            digit = n - temp * 10;  //2
+//            my_out  += digit +'0';
+//            n = temp;
+//        }
+//        if (negative==false)
+//        return stol(my_out);
+//        return -stol(my_out);
+//}
+//methode 4
+long long reverseNumber(long long n) {
+    int numOfDigits = 0, copyOfN; bool negative = false;
+    if (n < 0) { negative = true; n = -n; }
+    copyOfN = n;
+    while (copyOfN > 0)
+    {
+        copyOfN = copyOfN / 10;
+        numOfDigits++;
+    }
+    int temp, digit , HowMayDigits = numOfDigits;
+    long long sum = 0;
+    for (int i = 0; i < numOfDigits; i++) //302    /203
+    {
+        temp = n / 10; //30
+        digit = n - temp * 10;  //2
+        sum += digit * pow(10, --HowMayDigits);
+        n = temp;
+    }
+    if (negative==false)
+    return sum;
+    return -sum;
+}
+int main() {
+    cout<< reverseNumber(-1234);
+    return 0;
+}

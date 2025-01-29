@@ -1,0 +1,9 @@
+bool XO(const std::string& str)
+{
+    int xes=0, oes=0;
+    for (char ch : str)
+        if (ch == 'x' || ch == 'X') xes++;
+        else if (ch == 'o' || ch == 'O') oes++;
+    if (xes == oes) return true;
+    return false;
+}

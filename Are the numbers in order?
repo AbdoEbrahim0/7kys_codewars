@@ -1,23 +1,61 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
 #include <string>
 #include <cmath>
 #include <vector>
 using namespace std;
-// bool isAscOrder(std::vector<int> arr)
-// {
-//     vector<int>vec(arr);
-//     sort(vec.begin(), vec.end());
-//     for (int i = 0; i < arr.size(); i++)
-//     {
-//         if (vec[i] != arr[i]) return false;
-//     }
-//     return true;
-// }
-
+    //methode 1 :
+//bool isAscOrder(std::vector<int> arr)
+//{
+//    vector<int>vec(arr);
+//    sort(vec.begin(), vec.end());
+//    for (int i = 0; i < arr.size(); i++)
+//    {
+//        if (vec[i] != arr[i]) return false;
+//    }
+//    return true;
+//}
+//bool isAscOrder(std::vector<int> arr)
+//{
+//    for (int i = 0; i < arr.size() -1; i++)
+//    {
+//        if (arr[i+1] < arr[i]) return false;
+//    }
+//    return true;
+//}
+//bool isAscOrder(const std::vector<int>& v) {
+//    return std::is_sorted(v.begin(), v.end());
+//}
 bool isAscOrder(std::vector<int> arr)
 {
-    for (int i = 0; i < arr.size() -1; i++)
+    for (int i = 1; i < arr.size(); i++)
     {
-        if (arr[i+1] < arr[i]) return false;
+        if (arr[i] < arr[i - 1])
+        {
+            return false;
+        }
     }
+
     return true;
+}
+int main() {
+    cout << isAscOrder({1, 2, 4, 7, 19});
+    return 0;
 }

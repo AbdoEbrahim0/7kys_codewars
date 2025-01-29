@@ -1,0 +1,33 @@
+using namespace std;
+int sequenceSum(int start, int end, int step)
+{
+  int sum=0,res=start;
+  if (start > end)
+    {
+    return 0;
+  }else if (start == end) return start;
+  else 
+    while(res<=end)
+      {sum+=res;
+      res=res +step;
+      }
+return sum;
+}
+int sequenceSum(int start, int end, int step)
+{
+  int num = 0;
+  for(int i=start; i<=end; i+=step) num +=i;
+  return num;
+}
+
+int sequenceSum(int start, int end, int step)
+{
+	int sum = 0;
+  while (start <= end)
+  {
+  	sum += start;
+    start += step;
+  }
+  
+  return sum;
+}

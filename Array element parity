@@ -92,6 +92,24 @@ int solve(std::vector<int> v) {
         }
     return v[0];
 }
+
+int solve (std::vector<int> v){
+  int result = 0;
+  int minus=0, plus=0;
+  for( int i=0; i<v.size(); i++ )
+  {
+    if(v[i]<0)
+      minus++;
+    else
+      plus++;
+    result+=v[i];
+  }
+  if( plus-minus>0 )
+    return result/(plus-minus);
+  else
+    return result/(minus-plus);
+}
+
 int main() {
     cout << solve({ -3,1,2,3,-1,-4,-2 });
     return 0;

@@ -1,0 +1,98 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+using namespace std;
+    //methode 1 :  [1, -1, 2, -2, 3, 3] => 3
+//int solve(std::vector<int> v) {
+//    //..
+//    int opposite; bool oppIsExist;
+//    for (int i = 0; i < v.size(); i++)
+//    {
+//        opposite = -v[i];
+//        oppIsExist = false;
+//        for (int j = 0; j < v.size() && oppIsExist==false; j++)
+//        {
+//            if (opposite == v[j])
+//            {
+//                oppIsExist = true;
+//            }
+//        }
+//        if (oppIsExist == false)
+//        {
+//            return v[i];
+//        }
+//    }
+//}
+// methode 2
+//int solve(std::vector<int> v) {
+//    //..
+//    int element;
+//    for (int i = 0; i < v.size(); i++)
+//    {
+//        element = -v[i];
+//        if (find(v.begin(), v.end(), element) == v.end())
+//        {
+//            return v[i];
+//        }
+//    }
+//}
+//methode 3
+//int solve(std::vector<int> v) {
+//    std::set<int> s(v.begin(), v.end());
+//    return std::accumulate(s.begin(), s.end(), 0);
+//}
+        //methode 4
+//int solve(vector<int> v) {
+//	vector<int>r;
+//	for (int num : v)
+//	{
+//		r.push_back(num);
+//		for (int n : v)
+//		{
+//			if (-num == n)
+//			{
+//				r.pop_back();
+//				break;
+//			}
+//		}
+//	}
+//	return r[0];
+//}
+        //methode 5
+int solve(std::vector<int> v) {
+    for (int a = 0; a < v.size(); a++)
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i] + v[a] == 0)
+            {
+                v.erase(v.begin() + i);
+                v.erase(v.begin() + a);
+                i = 0;
+                a = 0;
+            }
+        }
+    return v[0];
+}
+int main() {
+    cout << solve({ -3,1,2,3,-1,-4,-2 });
+    return 0;
+}

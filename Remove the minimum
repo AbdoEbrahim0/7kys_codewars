@@ -1,0 +1,64 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+using namespace std;
+    //methode 1 : Input: [1,2,3,4,5], output = [2,3,4,5]
+//std::vector<unsigned int> removeSmallest(const std::vector<unsigned int>& numbers) {
+//    //your code here
+//    if (numbers.empty()) return {};
+//    vector<unsigned int> vec(numbers);
+//    //unsigned int min = numbers[0];
+//    auto minIterator = vec.begin();
+//    vector<int> ::iterator p; //this is how we declare iterator without initializing
+//    for (auto it = vec.begin(); it <= vec.end() - 1; it++)
+//    {
+//        if (*it < *minIterator)
+//        {
+//            minIterator = it;
+//            //min = *it;
+//        }
+//    }
+//    vec.erase(minIterator); // remove only one elemnt point to 
+//    //remove(vec.begin(), vec.end(), 1); // it not removes it only shifts vales into begining of vector and size remain 
+//    //vec.erase(remove(vec.begin(), vec.end(), 1), vec.end()); //correct way to remove  all occurances
+//    for (auto it = vec.begin(); it <= vec.end() - 1; it++)
+//    {
+//        cout << *it << "  ";
+//    }
+//    return vec;
+//}
+std::vector<unsigned int> removeSmallest(const std::vector<unsigned int>& numbers) {
+    //your code here
+    if (numbers.empty()) return {};
+    vector<unsigned int> vec(numbers);
+    auto min = min_element(vec.begin() , vec.end());
+    vec.erase(min); //correct way to remove  all occurances
+    for (auto it = vec.begin(); it <= vec.end() - 1; it++)
+    {
+        cout << *it << "  ";
+    }
+    return vec;
+}
+int main() {
+    removeSmallest({1,1, 2,3,4 });
+    return 0;
+}

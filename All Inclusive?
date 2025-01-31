@@ -1,0 +1,125 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+using namespace std;
+    //methode 1 : Input: [1,2,3,4,5], output = [2,3,4,5]
+//class Rotations
+//{
+//    //  "bsjq", ["bsjq", "qbsj", "sjqb", "twZNsslC", "jqbs"]) -> true
+//public:
+//    static bool containAllRots(const std::string& strng, std::vector<std::string>& arr)
+//    {
+//        vector <string> vec;
+//        vec.push_back(strng);
+//        string st1 = "", st2 = strng ,res="";
+//        for (int j = 0; j < strng.size() - 1; j++)
+//        {
+//            
+//            st1 += strng[j];
+//            st2.erase(find(st2.begin(), st2.end(), strng[j]));
+//            res = st2 + st1;
+//            //cout << st1 << "\n";
+//            //cout << st2 << "\n";
+//            //cout << vec[j] << "\n";
+//            vec.push_back(res);
+//            //cout << " ---------" << endl;
+//        }
+//        for (string val : vec)
+//        {
+//            if (find(arr.begin(), arr.end(), val) == arr.end()) //not found
+//                return false;
+//        }
+//            return true;
+//    }
+//};
+        // methode 2
+//class Rotations
+//{
+//public:
+//    static bool containAllRots(const std::string& strng, std::vector<std::string>& arr)
+//    {
+//        if (strng == "")
+//            return true;
+//        std::string value = strng;
+//        for (size_t i = 0; i < strng.length(); i++)
+//        {
+//            std::rotate(value.begin(), value.begin() + 1, value.end());
+//            if (std::find(arr.begin(), arr.end(), value) == arr.end())
+//                return false;
+//        }
+//        return true;
+//    }
+//};
+        // methode 3
+//class Rotations
+//{
+//public: static bool containAllRots(const std::string& strng, std::vector<std::string>& arr);
+//};
+//
+//std::string rot(const std::string& s, int i)
+//{
+//    return s.substr(i, s.length()) + s.substr(0, i);
+//}
+//bool Rotations::containAllRots(const std::string& strng, std::vector<std::string>& arr)
+//{
+//    for (unsigned int i = 0; i < strng.length(); i++)
+//    {
+//        std::string r = rot(strng, i);
+//        std::vector<std::string>::iterator it;
+//        it = std::find(arr.begin(), arr.end(), r);
+//        if (it == arr.end())
+//            return false;
+//    }
+//    return true;
+//}
+    //methode 4
+#include <unordered_set>
+using S = std::string;
+struct Rotations {
+    static bool containAllRots(S s, std::vector< S >& a) {
+        std::unordered_set< S > r;
+        for (size_t i{}; i < s.size(); ++i)
+            rotate(s.begin(), ++s.begin(), s.end()), r.insert(s);
+        for (const auto& e : a)
+            if (r.find(e) != r.cend()) r.erase(e);
+        return r.empty();
+    }
+};
+//methode 5
+class Rotations {
+public:
+    static bool containAllRots(std::string &s, std::vector<std::string> &arr){
+      for(size_t i=0; i<s.length(); i++){
+        std::string str=s.substr(i)+s.substr(0,i);               
+        if(std::find(arr.begin(),arr.end(),str)==arr.end()) return 0;}
+      return 1; }
+};  
+int main() {
+    Rotations myObj;
+    /*std::string s1 = "bsjq";
+    std::vector<std::string> v1 = { "bsjq", "qbsj", "sjqb", "twZNsslC", "jqbs" };*/
+    string s1 = "XjYABhR";
+    std::vector<std::string> v1 = { "TzYxlgfnhf", "yqVAuoLjMLy", "BhRXjYA", "YABhRXj", "hRXjYAB", "jYABhRX", "XjYABhR", "ABhRXjY" };
+    cout<< myObj.containAllRots(s1,v1);
+    
+    return 0;
+}

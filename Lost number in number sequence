@@ -1,0 +1,74 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+using namespace std;
+    //methode 1 :
+//int findDeletedNumber(list<int> startingList, list<int> mixedList)
+//{
+//    // Your code here
+//    for (int j = 0; j < startingList.size(); j++)
+//    {
+//        bool found = false;
+//        auto outer = next(startingList.begin(), j);
+//        for (int i = 0; i < mixedList.size(); i++)
+//        {
+//            
+//            auto inner = next(mixedList.begin(), i);
+//            if (*outer == *inner)
+//                found = true;
+//        }
+//        if (found == false) return *outer;
+//    }
+//    return 0;
+//}
+    //methode 2 :
+//int findDeletedNumber(list<int> startingList, list<int> mixedList)
+//{
+//    int sumStarting = std::accumulate(startingList.begin(), startingList.end(), 0);
+//
+//    int sumMixed = std::accumulate(mixedList.begin(), mixedList.end(), 0);
+//
+//    return sumStarting - sumMixed;
+//}
+        //methode 3 :
+//int findDeletedNumber(std::list<int> startingList, std::list<int> mixedList)
+//{
+//    mixedList.sort();
+//    auto i = std::mismatch(startingList.cbegin(), startingList.cend(), mixedList.cbegin(), mixedList.cend());
+//    if (i.first == startingList.cend())
+//        return 0;
+//    else
+//        return *i.first;
+//}
+        //methode 4 :
+int findDeletedNumber(list<int> startingList, list<int> mixedList)
+{
+    int x = 0;
+    for (int i : startingList) x ^= i;
+    for (int j : mixedList) x ^= j;
+    return x;
+}
+int main() {
+    cout<<findDeletedNumber({ 1,2,3,4,5,6,7,8,9 }, { 5,7,1,9,4,8,2,3 });
+    return 0;
+}

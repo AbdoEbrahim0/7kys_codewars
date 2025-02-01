@@ -46,22 +46,54 @@ using namespace std;
 //    return "Jumping!!";
 //}
         // methode 2
+//string jumpingNumber(int number)
+//{
+//    //302   3  0  2  302 %10 =(2)   302/10=30  30%10=(0)  30/10 =3    3%10=(3)  3/10=0
+//    if (number >= 0 && number <= 9) return "Jumping!!";
+//    string my_str = to_string(number);
+//    int j = 1;
+//    for (size_t i = 0; i < my_str.size() && j< my_str.size(); i++)
+//    {
+//        if ( (my_str [j] -'0') != (my_str[i] - '0')+1 )
+//        {
+//            if ((my_str[j] - '0') != (my_str[i] - '0') - 1)
+//                return "Not!!";
+//        }
+//        j++;
+//    }
+//    return "Jumping!!";
+//}
+//methode 3
+//string jumpingNumber(int number)
+//{
+//    string s = to_string(number);
+//    for (size_t i = 1; i < s.size(); ++i)
+//    {
+//        if (abs(s[i] - s[i - 1]) != 1)
+//            return "Not!!";
+//    }
+//    return "Jumping!!";
+//}
+//methode 4
+//string jumpingNumber(int number)
+//{
+//    if (number < 10)
+//        return "Jumping!!";
+//    while (number > 10)
+//    {
+//        int temp{ number % 10 };          //save last digit
+//        number /= 10;                   //remove last digit
+//        if (abs((number % 10) - temp) != 1)  //compare with next digit
+//            return "Not!!";
+//    }
+//    return "Jumping!!";
+//}
+//methode 5
 string jumpingNumber(int number)
 {
-    //302   3  0  2  302 %10 =(2)   302/10=30  30%10=(0)  30/10 =3    3%10=(3)  3/10=0
-    if (number >= 0 && number <= 9) return "Jumping!!";
-    string my_str = to_string(number);
-    int j = 1;
-    for (size_t i = 0; i < my_str.size() && j< my_str.size(); i++)
-    {
-        if ( (my_str [j] -'0') != (my_str[i] - '0')+1 )
-        {
-            if ((my_str[j] - '0') != (my_str[i] - '0') - 1)
-                return "Not!!";
-        }
-        j++;
-    }
-    return "Jumping!!";
+    if (number < 10) return "Jumping!!";
+    int diff = number % 10 - number / 10 % 10;
+    return diff == 1 || diff == -1 ? jumpingNumber(number / 10) : "Not!!";
 }
 int main() {
     cout << jumpingNumber(33);

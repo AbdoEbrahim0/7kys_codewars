@@ -1,0 +1,56 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+using namespace std;
+//methode 1 complexty O(N log n)
+// long sumTwoSmallestNumbers(std::vector<int> numbers)
+// {
+//     sort(numbers.begin(), numbers.end());
+//     return numbers[0] + numbers[1];
+// }
+//methode 2 complexty O(N)
+auto getMinThenRemove(std::vector<int>& my_vec)
+{
+    /*long min = my_vec[0];
+    for (long val : my_vec)
+       if (val < min)
+            min = val;*/
+    auto min = min_element(my_vec.begin(), my_vec.end());
+    return min;
+}
+long sumTwoSmallestNumbers(std::vector<int> numbers)
+{
+    auto min_1 = getMinThenRemove(numbers);
+    long miny1 = *min_1;
+    numbers.erase(min_1);
+
+    auto min_2 = getMinThenRemove(numbers);
+    long miny2 = *min_2;
+    numbers.erase(min_2);
+    //cout << miny1 << "     " << miny2 << "\n";
+    return miny1 + miny2;
+}
+int main() {
+    sumTwoSmallestNumbers({ 5, 8, 12, 19, 22 });
+    return 0;
+}

@@ -1,0 +1,122 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+using namespace std;
+    //methode 1 complexty : O(N)
+
+//int fac(int numToFac)
+//{
+//    if (numToFac <= 1) return 1;
+//    else return  numToFac * fac( numToFac-1);
+//    
+//}
+//string strong_num(int number)
+//{
+//    
+//    int temp = 0, sum = 0, copyOfNumber = number;
+//    
+//    while (number !=0)
+//    {
+//        temp = number % 10;
+//        sum += fac(temp);
+//        number = number / 10;
+//    }
+//    if (sum == copyOfNumber) return "STRONG!!!!";
+//    return "Not Strong !!";
+//}
+        //methode 2  log10(n) lookups for every number
+//std::string strong_num(int number)
+//{
+//    std::map<int, int> factorials;
+//    factorials[0] = 1;
+//    factorials[1] = 1;
+//    factorials[2] = 2;
+//    factorials[3] = 6;
+//    factorials[4] = 24;
+//    factorials[5] = 120;
+//    factorials[6] = 720;
+//    factorials[7] = 5040;
+//    factorials[8] = 40320;
+//    factorials[9] = 362880;
+//    int n = number, sum = 0;    
+//    while (n != 0)
+//    {
+//        sum += factorials[n % 10];
+//        n /= 10;
+//    }
+//    return sum == number ? "STRONG!!!!" : "Not Strong !!";
+//}
+        //methode 3 complexty O(N * N) 
+//int Factorial(int n)
+//{
+//    int f = 1;
+//    for (int i = 1; i <= n; ++i)
+//    {
+//        f *= i;
+//    }
+//    return f;
+//}
+//string strong_num(int number)
+//{
+//    int n = 0;
+//    for (int i = number; i > 0; i /= 10)
+//    {
+//        n += Factorial(i % 10);
+//    }
+//    return number == n ? "STRONG!!!!" : "Not Strong !!";
+//}
+        //methode 5
+//string strong_num(int number)
+//{
+//    int facts[10] = { 1, 1, 2, 6, 24, 120, 720, 5040, 403020, 362880 };
+//    int sum_fd = 0, n = number;
+//    while (n > 0) {
+//        sum_fd += facts[n % 10];
+//        n /= 10;
+//    }
+//    return sum_fd == number ? "STRONG!!!!" : "Not Strong !!";
+//}
+        //methode 6
+//int fact(int num)
+//{
+//    return num == 0 ? 1 : num * fact(num - 1);
+//}
+//string strong_num(int number)
+//{
+//    string str = to_string(number);
+//    int result = 0;
+//    for (char c : str) result += fact(c - '0');
+//    return result == number ? "STRONG!!!!" : "Not Strong !!";
+//}
+        //methode 7
+std::string strong_num(int number)
+{
+    auto f = [](int n) { int fact = 1; for (int i = 1; i <= n; ++i) fact *= i; return n ? fact : 1; };
+    std::string n = std::to_string(number);
+    return std::accumulate(n.begin(), n.end(), 0, [=](int s, char c) { return s + f(c - '0'); }) == number ? "STRONG!!!!" : "Not Strong !!";
+}
+int main() {
+    cout<<strong_num(2);
+    
+    return 0;
+}

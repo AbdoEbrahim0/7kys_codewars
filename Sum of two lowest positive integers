@@ -28,27 +28,59 @@ using namespace std;
 //     sort(numbers.begin(), numbers.end());
 //     return numbers[0] + numbers[1];
 // }
-//methode 2 complexty O(N)
-auto getMinThenRemove(std::vector<int>& my_vec)
-{
-    /*long min = my_vec[0];
-    for (long val : my_vec)
-       if (val < min)
-            min = val;*/
-    auto min = min_element(my_vec.begin(), my_vec.end());
-    return min;
+        //methode 2 complexty O(N)
+//auto getMinThenRemove(std::vector<int>& my_vec)
+//{
+//    /*long min = my_vec[0];
+//    for (long val : my_vec)
+//       if (val < min)
+//            min = val;*/
+//    auto min = min_element(my_vec.begin(), my_vec.end());
+//    return min;
+//}
+//long sumTwoSmallestNumbers(std::vector<int> numbers)
+//{
+//    auto min_1 = getMinThenRemove(numbers);
+//    long miny1 = *min_1;
+//    numbers.erase(min_1);
+//
+//    auto min_2 = getMinThenRemove(numbers);
+//    long miny2 = *min_2;
+//    numbers.erase(min_2);
+//    //cout << miny1 << "     " << miny2 << "\n";
+//    return miny1 + miny2;
+//}
+        // methode 3
+//long sumTwoSmallestNumbers(std::vector<int> numbers)
+//{
+//    long lowone = 0x7fffffff;
+//    long lowtwo = 0x7fffffff;
+//    for (int i : numbers) {
+//        if (i < lowone) {
+//            lowtwo = lowone;
+//            lowone = i;
+//        }
+//        else if (i < lowtwo)
+//            lowtwo = i;
+//    }
+//    return lowone + lowtwo;
+//}
+        // methode 3
+std::vector<int> bubbleSort(std::vector<int> n) {
+    for (size_t i = 0; i < n.size() - 1; i++) {
+        for (size_t j = 0; j < n.size() - i - 1; j++) {
+            if (n.at(j) > n.at(j + 1)) {
+                std::swap(n[j], n[j + 1]);
+            }
+        }
+    }
+    return n;
 }
+
 long sumTwoSmallestNumbers(std::vector<int> numbers)
 {
-    auto min_1 = getMinThenRemove(numbers);
-    long miny1 = *min_1;
-    numbers.erase(min_1);
-
-    auto min_2 = getMinThenRemove(numbers);
-    long miny2 = *min_2;
-    numbers.erase(min_2);
-    //cout << miny1 << "     " << miny2 << "\n";
-    return miny1 + miny2;
+    numbers = bubbleSort(numbers);
+    return numbers.at(0) + numbers.at(1);
 }
 int main() {
     sumTwoSmallestNumbers({ 5, 8, 12, 19, 22 });

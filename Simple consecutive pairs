@@ -1,0 +1,72 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+using namespace std;
+    //methode 1 complexty : O(N)
+//methode 2
+int pairs(std::vector<int>arr) {
+    int size = arr.size() ,count=0;
+    if (size % 2 == 1)  arr.erase(arr.end()-1); //odd
+    int NextIndex = 0;
+    for (int i = 0; i < arr.size() - 1; i++) 
+    {
+        NextIndex = i + 1;
+        if (arr.at(i) + 1 == arr.at(NextIndex) || arr.at(i) - 1 == arr.at(NextIndex))
+            count++;
+        i++;
+        /*
+        // this scenario fail in -1,-2 what if was 1,-2 it will count++ and the diference is not equal 1
+        if (arr.at(i) + arr.at(NextIndex) != 1 || arr.at(i) + arr.at(NextIndex) != -1)
+        {
+            if (abs(abs(arr.at(i)) - abs(arr.at(NextIndex))) == 1)
+                count++;
+        }*/
+        
+    }
+    return count;
+}
+//methode 2
+int pairs(std::vector<int> arr) {
+    int count = 0;
+    for (size_t i = 0; i < arr.size(); i += 2)
+        count += std::abs(arr[i] - arr[i + 1]) == 1;
+    return count;
+}
+//methode 3
+int pairs(std::vector<int>arr) {
+    int count = 0;
+    for (size_t i = 1; i < arr.size(); i += 2) {
+        if (abs(arr[i] - arr[i - 1]) == 1) ++count;
+    }
+    return count;
+}
+int main() {
+    /*cout << pairs({ 1,2}) << endl;
+    cout << pairs({ -1,2}) << endl;
+    cout << pairs({ 1,-2 }) << endl;
+    cout << pairs({ -1,-2 }) << endl;
+    */
+    cout << pairs({ 1,2,5,8,-4,-3,7,6,5 }) << endl;
+    cout << pairs({ 21, 20, 22, 40, 39, -56, 30, -55, 95, 94 }) <<endl;
+    return 0;
+}

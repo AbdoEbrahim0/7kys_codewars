@@ -1,0 +1,142 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+
+using namespace std;
+        //methode 1 complexty : O(1)
+            //Since year is a 4 - digit number, the worst case is iterating through a few dozen years
+            //(e.g., 8999 >> 9012 takes ~13 iterations).
+//unsigned short int nextHappyYear(unsigned short int year)
+//{
+//    int copyOfYear=year , AppearOnce = 0;;
+//    string st_year ;
+//    if (copyOfYear >= 1000 && copyOfYear <= 9000)
+//    {
+//        while (true) //O(fixed number)
+//        {
+//            year++;
+//            st_year = to_string(year);  //O(1)
+//                for (char c:st_year) //O(N=4)
+//                        for (char inner : st_year) //O(N=4)
+//                            if (inner == c) AppearOnce++;
+//                //cout << AppearOnce << " ";
+//            if (AppearOnce == st_year.size()) return year; //o(1)
+//            AppearOnce = 0;
+//        }
+//    }
+//    return 0;
+//}
+//methode 2 better than methode 1 becuse comp is O(N=fixed size) =O(1) instead of O(N^2) =O(1)
+//unsigned short int nextHappyYear(unsigned short int year)
+//{
+//    int copyOfYear = year;
+//    string st_year; set<char>my_set;
+//    if (copyOfYear >= 1000 && copyOfYear <= 9000)
+//    {
+//        while (true) //O(fixed number)
+//        {
+//            year++;
+//            st_year = to_string(year);  //O(1)
+//            for (char c : st_year) //O(N=4)
+//                my_set.insert(c);
+//            if (my_set.size() == st_year.size()) return year; //o(1)
+//            my_set.clear();
+//        }
+//    }
+//    return 0;
+//}
+
+//methode 3 complexty : O(1)
+//unsigned short int nextHappyYear(unsigned short int year)
+//{
+//    for (; year++;)
+//    {
+//        std::set<int> s;
+//        s.insert(year / 1000);
+//        s.insert(year / 100 % 10);
+//        s.insert(year / 10 % 10);
+//        s.insert(year % 10);
+//        if (s.size() == 4)
+//            return year;
+//    }
+//}
+        //methode 4
+//unsigned short int nextHappyYear(unsigned short int year)
+//{
+//    for (auto i = year + 1;; ++i)
+//    {
+//        //unordered_set<int> s( bla.begin(), bla.end() );
+//        std::string bla = std::to_string(i);
+//        std::unordered_set<int> s(bla.begin(), bla.end());
+//        if (s.size() > 3)
+//            return i;
+//    }
+//    return -1;
+//}
+        //methode 5
+//bool isHappyYear(unsigned short int year) {
+//    bool digits[10]{};
+//    while (year) {
+//        int digit = year % 10;
+//        if (digits[digit]) {
+//            return false;
+//        }
+//        digits[digit] = true;
+//        year /= 10;
+//    }
+//    return true;
+//}
+
+//unsigned short int nextHappyYear(unsigned short int year)
+//{
+//    do {
+//        year++;
+//    } while (!isHappyYear(year));
+//    return year;
+//}
+//      methode 6 O(N log N) = 4 log 4 =O(1)
+unsigned short nextHappyYear(unsigned short y) {                                                      // +(
+    ++y;
+    while (1) {
+        std::string s = std::to_string(y);
+        std::sort(s.begin(), s.end());
+        std::string r = std::to_string(y);
+        std::sort(r.begin(), r.end());
+
+        auto IT = std::unique(s.begin(), s.end()); 
+        s.erase(IT, s.end()); // same effect as s.erase(IT);
+        if (s == r)
+            return y;
+        ++y;
+    }
+}
+int main() {
+    //total complexity O(fixednum at worst case=13)*O(N)*O(N)=O(N^2)=O(13) * O(4^2)=O(13)*O(16)=O(1)
+    cout << nextHappyYear(1001) <<endl;//1023
+    cout << nextHappyYear(1123) << endl; //1203
+    cout << nextHappyYear(2001) << endl;//2013
+    cout << nextHappyYear(2334) << endl;//2340
+    cout << nextHappyYear(3331) << endl;//3401
+    return 0;
+}

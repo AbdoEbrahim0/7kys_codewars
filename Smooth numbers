@@ -1,0 +1,89 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+
+using namespace std;
+        //methode 1 complexty : O(1)
+std::string isSmooth(unsigned long n) {
+    //your code here
+/*
+    //7-Smooth Numbers >>2^a × 3^b × 5^c × 7^d
+    //5-Smooth Numbers >>2^a× 3^b × 5^c
+    //3-Smooth Numbers >>2^a × 3^b
+    //2-Smooth Numbers (Powers of 2)
+isSmooth(36) == "3-smooth"
+isSmooth(60) == "Hamming number"
+isSmooth(98) == "humble number"
+isSmooth(111) == "non-smooth"
+    */
+    int a = 0, b = 0, c = 0, d = 0;
+    unsigned long res=0;
+    for (int d=0;res<=n;d++)
+    {
+        res = pow(2, a) * pow(3, b) * pow(5, c) * pow(7, d);
+        res = 0;
+        for(int c = 0; res <= n; c++)
+        {
+            res = pow(2, a) * pow(3, b) * pow(5, c) * pow(7, d);
+            res = 0;
+            for (int b = 0; res <= n; b++)
+            {
+                res = pow(2, a) * pow(3, b) * pow(5, c) * pow(7, d);
+                res = 0;
+                for (int a = 0; res <= n; a++)
+                {
+                    res = pow(2, a) * pow(3, b) * pow(5, c) * pow(7, d);
+                    if (res == n)
+                    {
+                        if (d == 0 && b == 0 && c == 0) //2 smooth
+                            return "power of 2";
+                        else if (d == 0 && b == 0) //3smooth
+                            return  "3-smooth";
+                        else if (d == 0)//5smooth
+                            return  "Hamming number";
+                        else
+                            return "humble number"; //7smooth
+                    }           
+                }  
+            }
+        }
+        cout <<  res<<" ";       
+    }
+    return "non-smooth";
+}
+int main() {
+    cout << isSmooth(16) << "\n";
+    cout << isSmooth(36) << "\n";
+    
+    cout << isSmooth(60) << "\n";
+    cout << isSmooth(98) << "\n";
+    cout << isSmooth(111) << "\n";
+    cout << isSmooth(4096) << "\n";
+    cout << isSmooth(729) << "\n";
+    cout << isSmooth(3125) << "\n";
+    cout << isSmooth(7) << "\n";
+    cout << isSmooth(17) << "\n";
+
+    return 0;
+}

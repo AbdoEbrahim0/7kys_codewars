@@ -1,0 +1,52 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+
+using namespace std;
+        //methode 1 complexty : O(1)
+std::string workNeeded(int projectMinutes, std::vector<std::pair<int, int>> freelancers)
+{
+    int total_minutes=0;
+
+    for (pair<int, int> val : freelancers)
+    {
+        total_minutes = total_minutes+ val.first*60 + val.second;
+    }
+    if (projectMinutes <= total_minutes)
+    {
+        return "Easy Money!";
+    }
+    int diff = total_minutes - projectMinutes;
+    int hour = abs(diff)/ 60;
+    int min = projectMinutes - total_minutes -hour * 60;
+    if (min < 0) min = 0;
+    //return "I need to work 1 hour(s) and 0 minute(s)";
+    return "I need to work " + to_string(hour) + " hour(s) and " + to_string(min) + " minute(s)";
+}
+int main() {
+    cout << workNeeded(60, { {1,0} }) << "\n";
+    cout << workNeeded(60, { {0,0} }) << "\n";
+    cout << workNeeded(141, { {1,55}, {0,25} }) << "\n";
+    return 0;
+}

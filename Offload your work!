@@ -41,8 +41,9 @@ std::string workNeeded(int projectMinutes, std::vector<std::pair<int, int>> free
     int hour = abs(diff)/ 60;
     int min = projectMinutes - total_minutes -hour * 60;
     if (min < 0) min = 0;
-    //return "I need to work 1 hour(s) and 0 minute(s)";
-    return "I need to work " + to_string(hour) + " hour(s) and " + to_string(min) + " minute(s)";
+    string h(1, (hour + '0')); // Creates a string with 1 copy of 'a'
+    return "I need to work " + h + " hour(s) and " + to_string(min) + " minute(s)";
+
 }
 int main() {
     cout << workNeeded(60, { {1,0} }) << "\n";

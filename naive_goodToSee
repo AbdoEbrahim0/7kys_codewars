@@ -1,0 +1,93 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+
+using namespace std;
+//methode 1 complexty : O(1)
+std::string pyramid(int n) {
+    //your code here
+
+    int copyOfI, copyOfN;
+    string s;
+    for (int i = 0; i < n; i++)
+    {
+        copyOfN = n - i;
+        for (; copyOfN > 1;)
+        {
+            s.push_back(' ');
+            copyOfN--;
+        }
+        s.push_back('/');
+        copyOfI = i;
+        for (; copyOfI >= 0;)
+        {
+            if (copyOfI == 0)s.push_back('\\');
+            else if (i == n - 1) { s.push_back('__'); } ////if i reach floor use '_' instead of ' '
+            else s.push_back(' ');
+            if (i == n - 1) { s.push_back('_'); } // i repeat if to avoid making floor as next '_ _ _'
+            else
+                s.push_back(' ');
+            copyOfI--;
+        }
+        s.pop_back(); // to void '\_' in last floor
+        s.push_back('\n');
+    }
+    return s;
+}
+
+string pyramid(int n) {
+    string s;
+    for (int i = 1; i < n; ++i)
+        s += string(n - i, ' ') + "/" + string(2 * (i - 1), ' ') + "\\\n";
+    s += "/" + string(2 * (n - 1), '_') + "\\\n";
+    return s;
+}
+
+string pyramid(int n) {
+    string x = "";
+    for (int i = 0; i < n - 1; i++)
+        x += ' ';
+    for (int i = 0; i < n; i++)
+    {
+        x += '/';
+        for (int j = i; j > 0; j--)
+        {
+            if (i != n - 1)
+                x += "  ";
+            else
+                x += "__";
+        }
+        x += '\\';
+        x += '\n';
+        for (int s = 0; s < (n - 2) - i; s++)
+            x += ' ';
+    }
+    return x;
+}
+int main() {
+    cout<<pyramid(4);
+
+
+    return 0;
+}

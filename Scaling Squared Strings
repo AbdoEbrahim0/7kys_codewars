@@ -1,0 +1,120 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+
+using namespace std;
+//methode 1 complexty : O(1)
+class ScalingSqStrings
+{
+public:
+    static std::string scale(const std::string& strng, int k, int n)
+    {
+        if (strng.size() == 0) return "";
+        string res="", dublicated;
+        string part;
+        for (int s=0; s < strng.size(); s++)
+        {
+            for (int j = 0; j < k; j++)
+            {
+                //if (strng[s] != '\n')
+                    //continue;
+                if(strng[s] != '\n')
+                dublicated += strng[s];
+                /*else if (strng[s] == '\n' || s == strng.size() - 1)
+                {
+                   part = dublicated;   
+                }*/
+                
+            }
+            if(dublicated.size() !=1)
+            if (strng[s] == '\n' || strng[s] == strng[strng.size() - 1])
+            {
+                part = dublicated;
+                for (int q = 0; q < n - 1; q++)
+                {
+
+                    dublicated = dublicated + "\n" + part;
+                }
+
+                dublicated += "\n";
+                res += dublicated;
+                dublicated = "";
+            }
+            
+
+                //    if (strng[s] == '\n' || strng[s]==strng[strng.size()-1])
+                //    {
+                //        //res = dublicated;
+                //        for (int i = 0; i < n-1; i++)
+                //        {
+                //            if (strng[s] == '\n')
+                //            {
+                //                res = res + dublicated ;
+                //                for(int z=0;z< k-1;z++)
+                //                res.pop_back();
+                //                if (i != n - 2)
+                //                {
+                //                    res = res + dublicated;
+                //                    for (int z = 0; z < k - 1; z++)
+                //                        res.pop_back();
+                //                }
+                //                
+                //            }
+                //            else
+                //            {
+                //                res = res + dublicated + "\n";
+                //                if (i != n - 2)
+                //                {
+                //                    res = res + dublicated + "\n";
+                //                }
+
+                //            }
+                //                
+                //        }
+                //       dublicated = "";
+                //    }   
+        }   
+        //res.pop_back();
+        return res;
+    };
+};
+int main() {
+    ScalingSqStrings obj;
+    
+    //cout<<obj.scale("abcd\nefgh\nijkl\nmnop", 2, 3);
+    cout << obj.scale("lxnT\nqiut\nZZll\nFElq", 1, 2);
+    //cout << isSmooth(16) << "\n";
+    //cout << isSmooth(36) << "\n";
+    //cout << isSmooth(60) << "\n";
+    //cout << isSmooth(98) << "\n";
+    //cout << 111 % 3 << "/n";
+    //cout << isSmooth(111) << "\n";
+    //cout << isSmooth(4096) << "\n";
+    //cout << isSmooth(729) << "\n";
+    //cout << isSmooth(3125) << "\n";
+    //cout << isSmooth(7) << "\n";
+    //cout << isSmooth(17) << "\n";
+
+    return 0;
+}

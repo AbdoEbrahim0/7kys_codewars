@@ -1,5 +1,5 @@
 #include <string>
-using namespace std;
+ using namespace std;
 //methode 1 complexty :
 class ScalingSqStrings
 {
@@ -34,4 +34,60 @@ public:
       res.pop_back();
         return res;
     };
+};
+//methode 2
+	
+struct ScalingSqStrings {
+  static std::string scale( const std::string& s, int h, int v ) {
+    if ( s.empty() ) return {};
+    std::istringstream ss{ s };
+    std::string line, scaled;
+    while ( ss >> line )
+      for ( int i{}; i < v; ++i, scaled += '\n' )
+        for ( const char c : line )
+          scaled += std::string( h, c );
+    return scaled.pop_back(), scaled;
+  }
+};
+//methode 3
+class ScalingSqStrings
+{
+public:
+    static std::string scale(const std::string &str, int k, int n){
+    std::stringstream ss(str);
+    std::string word;
+    std::string res;
+    while(ss >> word){
+    for(int l =0;l<n;l++){
+    for(int i =0;i<word.length();i++){
+    for(int j =0;j<k;j++){
+    res += word[i];
+    }
+    }
+    res += '\n';
+    }
+    }
+    return res.substr(0,res.length()-1);
+    }
+};
+//methode 4
+struct ScalingSqStrings {
+    static string scale(const string &s, int k, int v) {
+        if(s.empty()) {
+            return "";
+        }
+      
+        stringstream ss(s);
+        string res, buf;
+        while (ss.good()) {
+            ss >> buf;
+            for(int i = 0; i < v; ++i) {
+                for_each(buf.begin(), buf.end(), [&](auto ch){ res.append(k, ch); });
+                res.push_back('\n');
+            }
+        }
+        res.pop_back(); //remove last '/n'
+      
+        return res;
+    }
 };

@@ -1,0 +1,132 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+
+using namespace std;
+//methode 1 complexty : O(1)
+using namespace std;
+
+vector<uint64_t > get_prime_mult(uint64_t num)
+{
+    vector<uint64_t >vec;
+    if (num == 1) return{ 1 };
+    float dividor = 2;
+    while (true)
+    {
+        if (num / dividor == floor(num / dividor))
+        {
+            vec.push_back(dividor);
+            num = num / dividor;
+            dividor = 1;
+        }
+        dividor++;
+        if (num == 0 || num == 1) break;
+    }
+    return vec;
+}
+uint64_t sum_differences_between_products_and_LCMs(const vector<pair<uint64_t, uint64_t> >& pairs)
+{
+    vector<uint64_t >vec_1, vec_2,primeFactors, copyOfVector_1, copyOfVector_2;
+    for (pair<uint64_t, uint64_t>  current_val : pairs)
+    {
+        vec_1= get_prime_mult(current_val.first);
+
+        vec_2 = get_prime_mult(current_val.second);
+        copyOfVector_1=vec_1;
+        copyOfVector_2 = vec_2;
+        
+        for (int i = 0; i < vec_1.size(); )
+        {
+            for (int j = 0; j < vec_2.size() && i < vec_1.size();)
+            {
+                if (vec_1.at(i) == vec_2.at(j))
+                {
+                    primeFactors.push_back(vec_1.at(i));
+                    i++;
+                    j++;
+                }
+                else
+                {
+                    //primeFactors.push_back(vec_1.at(i));
+                    i++;
+                }
+            }
+        }
+
+        vector<uint64_t >::iterator value;
+        for (value=primeFactors.begin(); value< primeFactors.end(); value++)
+        {
+            auto it_1 = find(vec_1.begin(), vec_1.end(), *value);
+            auto it_2 = find(vec_2.begin(), vec_2.end(), *value);
+            if (it_1 != vec_1.end()) //then it erased so we will not increment 
+            {
+                vec_1.erase(it_1);
+            }
+            if (it_2 != vec_2.end()) //then it erased so we will not increment 
+            {
+                vec_2.erase(it_2);
+            }
+        }
+    }
+    
+    uint64_t lcm=1;
+    for (uint64_t common : primeFactors)
+    {
+        lcm = lcm * common;
+    }
+    for (uint64_t varient_1: vec_1)
+    {
+        lcm = lcm * varient_1;
+    }
+    for (uint64_t varient_2 : vec_2)
+    {
+        lcm = lcm * varient_2;
+    }
+    return lcm; // Do your magic!
+}
+
+
+int main() {
+    /*for (uint64_t val : get_prime_mult(12))
+    {
+        cout << val << " ";
+    }*/
+
+    //cout << sum_differences_between_products_and_LCMs({{ 15,18 }, { 4,5 }, { 12,60 } });
+    cout << sum_differences_between_products_and_LCMs({ { 60,42 }});
+    //cout << obj.scale("lxnT\nqiut\nZZll\nFElq", 1, 2);
+    //cout << isSmooth(16) << "\n";
+    //cout << isSmooth(36) << "\n";
+    //cout << isSmooth(60) << "\n";
+    //cout << isSmooth(98) << "\n";
+    //cout << 111 % 3 << "/n";
+    //cout << isSmooth(111) << "\n";
+    //cout << isSmooth(4096) << "\n";
+    //cout << isSmooth(729) << "\n";
+    //cout << isSmooth(3125) << "\n";
+    //cout << isSmooth(7) << "\n";
+    //cout << isSmooth(17) << "\n";
+
+    return 0;
+}

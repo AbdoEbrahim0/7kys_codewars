@@ -31,6 +31,7 @@ vector<uint64_t > get_prime_mult(uint64_t num)
 {
     vector<uint64_t >vec;
     if (num == 1) return{ 1 };
+    if (num == 0) return{ 0 }; //if pair is empty 
     float dividor = 2;
     while (true)
     {
@@ -47,30 +48,31 @@ vector<uint64_t > get_prime_mult(uint64_t num)
 }
 uint64_t sum_differences_between_products_and_LCMs(const vector<pair<uint64_t, uint64_t> >& pairs)
 {
-    vector<uint64_t >vec_1, vec_2,primeFactors, copyOfVector_1, copyOfVector_2;
+    vector<uint64_t >vec_1, vec_2, primeFactors;
+    vector<uint64_t > lcm_vector, product_vector;
+    
     for (pair<uint64_t, uint64_t>  current_val : pairs)
     {
         vec_1= get_prime_mult(current_val.first);
-
         vec_2 = get_prime_mult(current_val.second);
-        copyOfVector_1=vec_1;
-        copyOfVector_2 = vec_2;
-        
+        product_vector.push_back(current_val.first * current_val.second);
         for (int i = 0; i < vec_1.size(); )
         {
             for (int j = 0; j < vec_2.size() && i < vec_1.size();)
             {
+                auto it = find(vec_2.begin(), vec_2.end(), vec_1.at(i));
                 if (vec_1.at(i) == vec_2.at(j))
                 {
                     primeFactors.push_back(vec_1.at(i));
                     i++;
                     j++;
                 }
-                else
-                {
-                    //primeFactors.push_back(vec_1.at(i));
+                else if(vec_1.at(i) > vec_2.at(j) && it != vec_2.end())
+                    j++;
+                
+                else 
                     i++;
-                }
+                
             }
         }
 
@@ -88,45 +90,51 @@ uint64_t sum_differences_between_products_and_LCMs(const vector<pair<uint64_t, u
                 vec_2.erase(it_2);
             }
         }
+        uint64_t lcm = 1;
+        for (uint64_t common : primeFactors)
+        {
+            lcm = lcm * common;
+        }
+        primeFactors.clear();
+        for (uint64_t varient_1 : vec_1)
+        {
+            lcm = lcm * varient_1;
+        }
+        for (uint64_t varient_2 : vec_2)
+        {
+            lcm = lcm * varient_2;
+        }
+        
+        lcm_vector.push_back(lcm);
+        
     }
-    
-    uint64_t lcm=1;
-    for (uint64_t common : primeFactors)
+    for (uint64_t lcm_val : lcm_vector) cout << lcm_val << " ";
+    cout << "\n------------\n";
+    for (uint64_t prod_val : product_vector) cout << prod_val << " ";
+    cout << "\n------------\n";
+    vector <uint64_t>sum_differences_between_products_and_LCMs_vector;
+    for (int z = 0; z < product_vector.size(); z++)
     {
-        lcm = lcm * common;
+        sum_differences_between_products_and_LCMs_vector.push_back(product_vector.at(z) - lcm_vector.at(z));
     }
-    for (uint64_t varient_1: vec_1)
-    {
-        lcm = lcm * varient_1;
-    }
-    for (uint64_t varient_2 : vec_2)
-    {
-        lcm = lcm * varient_2;
-    }
-    return lcm; // Do your magic!
+
+
+    return accumulate(sum_differences_between_products_and_LCMs_vector.begin(), sum_differences_between_products_and_LCMs_vector.end(),0); // Do your magic!
+
+
 }
 
 
 int main() {
-    /*for (uint64_t val : get_prime_mult(12))
-    {
-        cout << val << " ";
-    }*/
-
-    //cout << sum_differences_between_products_and_LCMs({{ 15,18 }, { 4,5 }, { 12,60 } });
-    cout << sum_differences_between_products_and_LCMs({ { 60,42 }});
-    //cout << obj.scale("lxnT\nqiut\nZZll\nFElq", 1, 2);
-    //cout << isSmooth(16) << "\n";
-    //cout << isSmooth(36) << "\n";
-    //cout << isSmooth(60) << "\n";
-    //cout << isSmooth(98) << "\n";
-    //cout << 111 % 3 << "/n";
-    //cout << isSmooth(111) << "\n";
-    //cout << isSmooth(4096) << "\n";
-    //cout << isSmooth(729) << "\n";
-    //cout << isSmooth(3125) << "\n";
-    //cout << isSmooth(7) << "\n";
-    //cout << isSmooth(17) << "\n";
+    
+    cout << sum_differences_between_products_and_LCMs({ {15,18}, {4,5}, {12,60} }) <<" <<\n"; //840
+    cout << sum_differences_between_products_and_LCMs({ {1, 1}, { 0,0 }, { 13,91 } }) << "<<\n";//1092
+    cout << sum_differences_between_products_and_LCMs({ {15,7}, {4,5}, {19,60} }) << "<<\n";//0
+    cout << sum_differences_between_products_and_LCMs({ {20,50}, {10,10}, {50,20} }) << "<<\n";//1890
+    cout << sum_differences_between_products_and_LCMs({ {} }); //0
+    
+    //cout << sum_differences_between_products_and_LCMs({ { 60,42 }});
+    
 
     return 0;
 }

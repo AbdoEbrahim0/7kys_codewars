@@ -1,0 +1,25 @@
+#include <string>
+#include <map>
+using namespace std;
+std::string outed(const std::map<std::string, int>& meet, const std::string& boss) {
+    string res;
+    
+    int sum = 0, count=0;
+  
+    for (auto it = meet.begin(); it != meet.end(); ++it) {
+      if(it->second >0)
+        {
+      sum += it->second;
+        count++;
+      }
+      
+    }
+  //sum=sum-meet.at(boss);
+  sum=sum + meet.at(boss);
+    int avg = (sum / count );
+    if (avg <= 5)
+        res = "Get Out Now!";
+    else
+        res = "Nice Work Champ!";
+    return res;
+}

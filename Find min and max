@@ -1,0 +1,19 @@
+#include <utility>
+#include <vector>
+using namespace std;
+std::pair<long, long> get_min_max(const std::vector<long>& seq) {
+    pair<long, long> p;
+    long min=seq[0],max=seq[0];
+    for (int i = 0; i < seq.size(); i++)
+    {
+        if (min > seq.at(i)) min = seq.at(i);
+        if (max < seq.at(i)) max = seq.at(i);
+    }
+    p.first = min;
+    p.second = max;
+    return p;
+}
+std::pair<long, long> get_min_max( const std::vector< long >& seq ) {
+  const auto [ min, max ]{ ranges::minmax( seq )};
+  return std::make_pair( min, max );
+}

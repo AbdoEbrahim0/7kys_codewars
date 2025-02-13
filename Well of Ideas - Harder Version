@@ -24,3 +24,14 @@ std::string well(const std::vector<std::vector<std::string>>& arr) {
         return "I smell a series!";
      return "Fail!";
 }
+
+//methode 2
+std::string well(const std::vector<std::vector<std::string>>& arr) {
+  unsigned count  = 0;
+  for (auto& array : arr) 
+    for (auto idea : array) {
+      std::transform(idea.begin(), idea.end(), idea.begin(), tolower);
+      if (idea == "good") count++;
+    }
+  return (count == 0) ? "Fail!" : (count < 3) ? "Publish!" : "I smell a series!";
+}

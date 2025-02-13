@@ -1,0 +1,26 @@
+#include <string>
+#include <vector>
+using namespace std;
+std::string well(const std::vector<std::vector<std::string>>& arr) {
+    int i=0,count = 0, sizeOfInnerVec=0;
+    string cur;
+    for (vector<std::string> val : arr)
+    {
+        for (string currWord : val)
+        {
+            if ( tolower(currWord[0]) == 'g')
+            {
+                count++;
+            }
+            
+        
+        }
+    }
+    if (count == 1 || count == 2)
+    {
+        return "Publish!";
+    }
+    else if (count > 2)
+        return "I smell a series!";
+     return "Fail!";
+}

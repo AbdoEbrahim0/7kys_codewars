@@ -1,0 +1,70 @@
+//bool shared_bits(long a, long b) {
+//    string s1 = "",s2="";
+//    while (a !=0)
+//    {
+//    if (a % 2 == 0) s1 += '0';
+//    else s1 += '1';
+//    a = a / 2 ;
+//    }
+//    
+//    while (b != 0)
+//    {
+//        if (b % 2 == 0) s2 += '0';
+//        else s2 += '1';
+//        b = b / 2;
+//    }
+//    /*cout << s1 << "\n";
+//    cout << s2 << "\n";
+//    */
+//    int count = 0;
+//    int size;
+//    if (s1.size() < s2.size()) size = s1.size();
+//    else size = s2.size();
+//    for (int i = 0; i < size; i++)
+//    {
+//        if (s1[i] == '1' && s2[i] == '1')
+//        {
+//            count++;
+//            if (count == 2) return true;
+//        }
+//    }
+//        return false;
+//}
+// 
+// 
+//bool shared_bits(long a, long b) {
+//    bitset<32> c = a & b;
+//    cout << c;
+//    return c.count() >= 2;
+//
+//}
+
+bool shared_bits(long a, long b) {
+    long c = a & b;
+    long c_and_1= c & 1;
+    while (c && !(c_and_1))
+        c >>= 1;
+    return c >> 1;
+}
+
+bool shared_bits(long a, long b) {
+    int c = a & b;
+    int ones = 0;
+    while (c) {
+        ones += c & 1;
+        c >>= 1;
+    }
+    return ones >= 2 ? true : false;
+}
+
+bool shared_bits(long a, long b)
+{
+
+    int temp = a & b, count = 0;
+    while (temp)
+    {
+        count += temp & 1;
+        temp >>= 1;
+    }
+    return count > 1 ? true : false;
+}

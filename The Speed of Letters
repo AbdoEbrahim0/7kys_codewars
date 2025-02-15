@@ -1,0 +1,30 @@
+#include <string>
+#include <map>
+using namespace std;
+
+std::string speedify(const std::string& input)
+{
+  if(input.size()==0) return "";
+    map <char, int> my_map;
+    char ch = 'A';
+    for (int i = 0; i < 26; i++) //0-25
+    {
+        my_map.insert({ ch,i });
+        ch++;
+    }
+
+    int max_size = 0;
+    for (int w = 0; w < input.size(); w++)
+    {
+        if ((w + my_map.at(input[w])) > max_size)
+            max_size = w + my_map.at(input[w]);
+    }
+    string res;
+    for (int e = 0; e <= max_size; e++)
+        res += " ";
+    
+    for ( int q=0; q<input.size();q++)
+        res[q + my_map.at(input[q])] = input[q];
+    
+    return  res; // your code here
+}

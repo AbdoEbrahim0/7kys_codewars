@@ -1,0 +1,22 @@
+#include <list>
+#include <iostream>
+using namespace std;
+int square_pi(int digits) {
+    //Code probably goes here
+    string s = "31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+    float sum = 0;
+    for (int u = 0; u < digits; u++)
+        sum += pow(s[u] - '0', 2);
+    return int(ceil(sqrt(sum))) ;
+}
+int square_pi(int digits) {
+    double num{};
+    int count{};
+    std::list<int> MPI{ 3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0,5,8,2,0,9,7,4,9,4,4,5,9,2,3,0,7,8,1,6,4,0,6,2,8,6,2,0,8,9,9,8,6,2,8,0,3,4,8,2,5,3,4,2,1,1,7,0,6,7,9 };
+    for (auto i : MPI) {
+        if (count == digits) break;
+        num += i * i;
+        ++count;
+    }
+    return ceil(sqrt(num));
+}

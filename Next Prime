@@ -1,0 +1,42 @@
+//methode 1 O(N)
+int nextPrime(int n) {
+    if (n <= 1) return 2;
+
+    while (true) {
+        n++;
+        bool isPrime = true;
+        int limit = sqrt(n);  // Calculate sqrt(n) once
+
+        for (int primeFactor = 2; primeFactor <= limit; primeFactor++) {
+            if (n % primeFactor == 0) {  // Use modulo instead of float division
+                isPrime = false;
+                break; // No need to keep checking if already not prime
+            }
+        }
+
+        if (isPrime) return n;
+    }
+}
+//methode 2 O(sqrt(N))
+bool isPrime(int num)
+{
+    for (int i = 2; i * i <= num; i++)
+    {
+        if (num % i == 0)
+            return false;
+    }
+    return true;
+}
+
+int nextPrime(int num)
+{
+    if (num == 0 || num == 1)
+        return 2;
+
+    for (int i = num + 1; ; i++)
+    {
+        if (isPrime(i))
+            return i;
+    }
+    return -1;
+}

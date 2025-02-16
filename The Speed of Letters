@@ -1,30 +1,155 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
 #include <string>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
 #include <map>
+#include <numeric>
+#include<sstream>
+#include <set>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <list>
+#include<unordered_set>
+#include <bitset>
 using namespace std;
 
-std::string speedify(const std::string& input)
-{
-  if(input.size()==0) return "";
-    map <char, int> my_map;
-    char ch = 'A';
-    for (int i = 0; i < 26; i++) //0-25
-    {
-        my_map.insert({ ch,i });
-        ch++;
-    }
+//methode 1 complexty : O()
+//bool shared_bits(long a, long b) {
+//    string s1 = "",s2="";
+//    while (a !=0)
+//    {
+//    if (a % 2 == 0) s1 += '0';
+//    else s1 += '1';
+//    a = a / 2 ;
+//    }
+//    
+//    while (b != 0)
+//    {
+//        if (b % 2 == 0) s2 += '0';
+//        else s2 += '1';
+//        b = b / 2;
+//    }
+//    /*cout << s1 << "\n";
+//    cout << s2 << "\n";
+//    */
+//    int count = 0;
+//    int size;
+//    if (s1.size() < s2.size()) size = s1.size();
+//    else size = s2.size();
+//    for (int i = 0; i < size; i++)
+//    {
+//        if (s1[i] == '1' && s2[i] == '1')
+//        {
+//            count++;
+//            if (count == 2) return true;
+//        }
+//    }
+//        return false;
+//}
+// 
+// 
+//bool shared_bits(long a, long b) {
+//    bitset<32> c = a & b;
+//    cout << c;
+//    return c.count() >= 2;
+//
+//}
+//bool shared_bits(long a, long b) {
+//    long c = a & b;
+//    long c_and_1= c & 1;
+//    while (c && !(c_and_1))
+//        c >>= 1;
+//    return c >> 1;
+//}
+//
+//bool shared_bits(long a, long b) {
+//    int c = a & b;
+//    int ones = 0;
+//    while (c) {
+//        ones += c & 1;
+//        c >>= 1;
+//    }
+//    return ones >= 2 ? true : false;
+//}
+//
+//bool shared_bits(long a, long b)
+//{
+//
+//    int temp = a & b, count = 0;
+//    while (temp)
+//    {
+//        count += temp & 1;
+//        temp >>= 1;
+//    }
+//    return count > 1 ? true : false;
+//}
+//methode 1
+//std::string speedify(const std::string& input)
+//{
+//    map <char, int> my_map;
+//    char ch = 'A';
+//    for (int i = 0; i < 26; i++) //0-25
+//    {   
+//        my_map.insert({ ch,i });
+//        ch++;
+//    }
+//    int max_size = 0;
+//    for (int w = 0; w < input.size(); w++)
+//    {
+//        if ((w + my_map.at(input[w])) > max_size)
+//            max_size = w + my_map.at(input[w]);
+//    }
+//    
+//    string res;
+//    for (int e = 0; e <= max_size; e++)
+//    {
+//        res += " ";
+//    }
+//    for ( int q=0; q<input.size();q++)
+//    {
+//        res[q + my_map.at(input[q])] = input[q];
+//    }
+//    return  res; // your code here
+//}
 
-    int max_size = 0;
-    for (int w = 0; w < input.size(); w++)
+//methode 2
+string speedify(const string& input)
+{
+    auto res = string(125, ' ');
+
+    int last_char_index;
+    for (int i = 0; i < input.length(); ++i)
     {
-        if ((w + my_map.at(input[w])) > max_size)
-            max_size = w + my_map.at(input[w]);
+        char c = input[i];
+        int jump = c - 'A';
+        last_char_index = i + jump;
+        res[i + jump] = c;
     }
-    string res;
-    for (int e = 0; e <= max_size; e++)
-        res += " ";
+    //return res.substr(0, last_char_index+1 );
+    int pos = res.find_last_not_of(' ') + 1;
+
+    return res.substr(0, pos);
+}
+int main() {
+
+    cout<< speedify("AZ")<<"\n-----\n";
+    cout << speedify("ABC") << "\n-----\n";
+    cout << speedify("ACE") << "\n-----\n";
+    cout << speedify("CBA") << "\n-----\n";
     
-    for ( int q=0; q<input.size();q++)
-        res[q + my_map.at(input[q])] = input[q];
-    
-    return  res; // your code here
+  
+
+    return 0;
 }

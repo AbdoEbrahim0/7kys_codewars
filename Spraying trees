@@ -1,0 +1,19 @@
+#include <string>
+using namespace std;
+std::string task(std::string day_of_week, int n, int c) {
+    
+    string worker;
+    if (day_of_week == "Monday")
+        worker = "James";
+    else if (day_of_week == "Tuesday")
+        worker = "John";
+    else if (day_of_week == "Wednesday")
+        worker = "Robert";
+    else if (day_of_week == "Thursday")
+        worker = "Michael";
+    else if (day_of_week == "Friday")
+        worker = "William";
+
+    return "It is " + day_of_week + " today, " + worker + ", you have to work, you must spray " + to_string(n) + " trees and you need " + to_string(n * c) + " dollars to buy liquid";
+    //"It is Wednesday today, Robert, you have to work, you must spray 10 trees and you need 20 dollars to buy liquid"));
+}

@@ -22,119 +22,175 @@
 #include <vector>
 #include <list>
 #include<unordered_set>
+#include <bitset>
 
 using namespace std;
-//methode 1 complexty : O(1)
-using namespace std;
 
-vector<uint64_t > get_prime_mult(uint64_t num)
-{
-    vector<uint64_t >vec;
-    if (num == 1) return{ 1 };
-    if (num == 0) return{ 0 }; //if pair is empty 
-    float dividor = 2;
-    while (true)
-    {
-        if (num / dividor == floor(num / dividor))
-        {
-            vec.push_back(dividor);
-            num = num / dividor;
-            dividor = 1;
-        }
-        dividor++;
-        if (num == 0 || num == 1) break;
-    }
-    return vec;
+//methode 1  
+//i used this refernce video from youtube to apply https://youtu.be/p-pub0DqSgU?si=5T2Lzu6k0P3jXc47
+// which say  law: common multiple factors * multiple factors which appear once
+        //more efficent alg 
+ //vector<uint64_t > get_prime_mult(uint64_t num)
+ //{
+ //    vector<uint64_t >vec;
+ //    if (num == 1) return{ 1 };
+ //    if (num == 0) return{ 0 }; //if pair is empty 
+ //    float dividor = 2;
+ //    while (true)
+ //    {
+ //        if (num / dividor == floor(num / dividor))
+ //        {
+ //            vec.push_back(dividor);
+ //            num = num / dividor;
+ //            dividor = 1;
+ //        }
+ //        dividor++;
+ //        if (num == 0 || num == 1) break;
+ //    }
+ //    return vec;
+ //}
+        //more efficent alg 
+//vector<uint64_t> get_prime_mult(uint64_t num) {
+//         if (num == 1) return{ 1 };
+//     if (num == 0) return{ 0 }; //if pair is empty 
+//    vector<uint64_t> factors;
+//    for (uint64_t i = 2; i * i <= num; i++) {
+//        while (num % i == 0) {
+//            factors.push_back(i);
+//            num /= i;
+//        }
+//    }
+//    if (num > 1) factors.push_back(num);  // If num is prime
+//    return factors;
+//}
+//uint64_t sum_differences_between_products_and_LCMs(const vector<pair<uint64_t, uint64_t> >& pairs)
+//{
+//    vector<uint64_t >vec_1, vec_2, primefactors;
+//    vector<uint64_t > lcm_vector, product_vector;
+//    for (pair<uint64_t, uint64_t> current_val : pairs)
+//    {
+//                 vec_1= get_prime_mult(current_val.first);
+//                 vec_2 = get_prime_mult(current_val.second);
+//                 product_vector.push_back(current_val.first * current_val.second);
+//                 for (int i = 0; i < vec_1.size(); )
+//                 {
+//                     for (int j = 0; j < vec_2.size() && i < vec_1.size();)
+//                     {
+//                         auto it = find(vec_2.begin(), vec_2.end(), vec_1.at(i));
+//                         if (vec_1.at(i) == vec_2.at(j))
+//                         {
+//                             primefactors.push_back(vec_1.at(i));
+//                             i++;
+//                             j++;
+//                         }
+//                         else if(vec_1.at(i) > vec_2.at(j) && it != vec_2.end())
+//                             j++;
+//                         else 
+//                             i++;
+//
+//                     }
+//                 }
+//                 vector<uint64_t >::iterator value;
+//                 for (value=primefactors.begin(); value< primefactors.end(); value++)
+//                 {
+//                     auto it_1 = find(vec_1.begin(), vec_1.end(), *value);
+//                     auto it_2 = find(vec_2.begin(), vec_2.end(), *value);
+//                     if (it_1 != vec_1.end()) //then it erased so we will not increment 
+//                         vec_1.erase(it_1);
+//                     if (it_2 != vec_2.end()) //then it erased so we will not increment 
+//                         vec_2.erase(it_2);
+//                     
+//                 }
+//                 uint64_t lcm = 1;
+//                     for (uint64_t common : primefactors)
+//                         lcm = lcm * common;
+//                 primefactors.clear();
+//                     for (uint64_t varient_1 : vec_1)
+//                         lcm = lcm * varient_1;
+//                     for (uint64_t varient_2 : vec_2)
+//                         lcm = lcm * varient_2;
+//                 lcm_vector.push_back(lcm);
+//    }
+//
+//
+//         /*for (uint64_t lcm_val : lcm_vector) cout << lcm_val << " ";
+//         cout << "\n------------\n";
+//         for (uint64_t prod_val : product_vector) cout << prod_val << " ";
+//         cout << "\n------------\n";
+//         */
+//    uint64_t sum_differences = 0;
+//    for (size_t i = 0; i < product_vector.size(); i++) {
+//        sum_differences += product_vector[i] - lcm_vector[i];
+//    }
+//    return sum_differences;
+//    //##############  When using std::accumulate, the sum might exceed uint64_t limits, causing an overflow ##############
+//        //vector <uint64_t>sum_differences_between_products_and_LCMs_vector;
+//        //for (int z = 0; z < product_vector.size(); z++)
+//        //{
+//        //    sum_differences_between_products_and_LCMs_vector.push_back(product_vector.at(z) - lcm_vector.at(z));
+//        //}
+//        //return accumulate(sum_differences_between_products_and_LCMs_vector.begin(), sum_differences_between_products_and_LCMs_vector.end(), 0); // Do your magic!
+//
+//}
+
+this URL help me : https://www.youtube.com/watch?v=Jwf6ncRmhPg
+        //methode 2
+// uint64_t gcd(uint64_t a, uint64_t b)
+// {
+//     if (a == 0) return b;
+//     if (b == 0) return a;
+//     uint64_t  q = b / a;
+//     uint64_t  r = b - q * a;
+//     if (r > a)
+//         swap(r, a);
+//     gcd(r, a);
+// }
+// uint64_t gcd(uint64_t a, uint64_t b)
+// {
+//     if (a == 0) return b;
+//     if (b == 0) return a;
+// //     uint64_t  q = b / a;
+// //     uint64_t  r = b - q * a;
+// //     if (r > a)
+// //         swap(r, a);
+// //     gcd(r, a);
+//     if (b % a > a)
+//         gcd( a,b % a);
+//   return gcd(b % a, a);
+// }
+uint64_t gcd(uint64_t a, uint64_t b) {
+    if (b == 0) return a; // Base case
+    return gcd(b, a % b); // Recursive call
 }
+uint64_t lcm(uint64_t a, uint64_t b) {
+    uint64_t avoid_zero = gcd(a, b);
+    if (avoid_zero == 0) return 0;
+    return (a / avoid_zero) * b;  // To prevent overflow in multiplication
+}
+
 uint64_t sum_differences_between_products_and_LCMs(const vector<pair<uint64_t, uint64_t> >& pairs)
 {
-    vector<uint64_t >vec_1, vec_2, primeFactors;
     vector<uint64_t > lcm_vector, product_vector;
-    
-    for (pair<uint64_t, uint64_t>  current_val : pairs)
+    for (pair<uint64_t, uint64_t> current_val : pairs)
     {
-        vec_1= get_prime_mult(current_val.first);
-        vec_2 = get_prime_mult(current_val.second);
+        lcm_vector.push_back(lcm(current_val.first, current_val.second));
         product_vector.push_back(current_val.first * current_val.second);
-        for (int i = 0; i < vec_1.size(); )
-        {
-            for (int j = 0; j < vec_2.size() && i < vec_1.size();)
-            {
-                auto it = find(vec_2.begin(), vec_2.end(), vec_1.at(i));
-                if (vec_1.at(i) == vec_2.at(j))
-                {
-                    primeFactors.push_back(vec_1.at(i));
-                    i++;
-                    j++;
-                }
-                else if(vec_1.at(i) > vec_2.at(j) && it != vec_2.end())
-                    j++;
-                
-                else 
-                    i++;
-                
-            }
-        }
-
-        vector<uint64_t >::iterator value;
-        for (value=primeFactors.begin(); value< primeFactors.end(); value++)
-        {
-            auto it_1 = find(vec_1.begin(), vec_1.end(), *value);
-            auto it_2 = find(vec_2.begin(), vec_2.end(), *value);
-            if (it_1 != vec_1.end()) //then it erased so we will not increment 
-            {
-                vec_1.erase(it_1);
-            }
-            if (it_2 != vec_2.end()) //then it erased so we will not increment 
-            {
-                vec_2.erase(it_2);
-            }
-        }
-        uint64_t lcm = 1;
-        for (uint64_t common : primeFactors)
-        {
-            lcm = lcm * common;
-        }
-        primeFactors.clear();
-        for (uint64_t varient_1 : vec_1)
-        {
-            lcm = lcm * varient_1;
-        }
-        for (uint64_t varient_2 : vec_2)
-        {
-            lcm = lcm * varient_2;
-        }
-        
-        lcm_vector.push_back(lcm);
-        
     }
-    for (uint64_t lcm_val : lcm_vector) cout << lcm_val << " ";
-    cout << "\n------------\n";
-    for (uint64_t prod_val : product_vector) cout << prod_val << " ";
-    cout << "\n------------\n";
-    vector <uint64_t>sum_differences_between_products_and_LCMs_vector;
-    for (int z = 0; z < product_vector.size(); z++)
-    {
-        sum_differences_between_products_and_LCMs_vector.push_back(product_vector.at(z) - lcm_vector.at(z));
+    uint64_t sum_differences = 0;
+    for (size_t i = 0; i < product_vector.size(); i++) {
+        sum_differences += product_vector[i] - lcm_vector[i];
     }
-
-
-    return accumulate(sum_differences_between_products_and_LCMs_vector.begin(), sum_differences_between_products_and_LCMs_vector.end(),0); // Do your magic!
-
-
+    return sum_differences;
 }
-
-
 int main() {
-    
-    cout << sum_differences_between_products_and_LCMs({ {15,18}, {4,5}, {12,60} }) <<" <<\n"; //840
-    cout << sum_differences_between_products_and_LCMs({ {1, 1}, { 0,0 }, { 13,91 } }) << "<<\n";//1092
-    cout << sum_differences_between_products_and_LCMs({ {15,7}, {4,5}, {19,60} }) << "<<\n";//0
-    cout << sum_differences_between_products_and_LCMs({ {20,50}, {10,10}, {50,20} }) << "<<\n";//1890
-    cout << sum_differences_between_products_and_LCMs({ {} }); //0
-    
-    //cout << sum_differences_between_products_and_LCMs({ { 60,42 }});
-    
-
+         //cout << gcd(15, 18)<<"\n";// 90
+         //cout << gcd(4, 5) << "\n"; //20
+         //cout << gcd(12, 60) << "\n";//60
+         //cout << gcd(180,196) << "\n";//4
+    cout << sum_differences_between_products_and_LCMs({ { 15,18 }, { 4,5 }, { 12,60 } }) << "\n";//840
+    cout << sum_differences_between_products_and_LCMs({ {1, 1}, { 0,0 }, { 13,91 }}) << "\n";//1092
+    cout << sum_differences_between_products_and_LCMs({ {15,7}, {4,5}, {19,60} }) << "\n";//0
+    cout << sum_differences_between_products_and_LCMs({ {20,50}, {10,10}, {50,20} }) << "\n";//1890
+    cout << sum_differences_between_products_and_LCMs({}) << "\n";//0
     return 0;
 }

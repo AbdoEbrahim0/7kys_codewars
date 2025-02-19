@@ -1,4 +1,14 @@
-
+bool IsLeapYear(int year)
+{
+    if (year % 4 == 0) {
+        if (year % 100 == 0) {
+            int x = year % 400;
+            return (x== 0);
+        }
+        return true;
+    }
+    return false;
+}
 bool IsLeapYear(int year) {
     if (year % 4 == 0) {
           if (year % 400 == 0) 

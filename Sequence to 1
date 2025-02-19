@@ -1,0 +1,15 @@
+using namespace std;
+
+std::vector<int> seqToOne(int n) {
+  vector<int> vec;
+  int r;
+  if(n<0) r=1;
+    else
+      r=-1;
+  for(int i=n ;i!=1;i+=r)
+    {
+    vec.push_back(i);
+  }
+  vec.push_back(1);
+  return vec;
+}

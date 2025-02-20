@@ -1,0 +1,95 @@
+
+//methode 1 O(1)
+unsigned cost(unsigned n) {
+    // your code
+    int cost = 0, hours;
+    if(n>5)
+    cost += 30;
+    if (n < 60) hours = 0;
+    else
+    {
+        //cout << cost(0) << "\n"; //0$
+        //cout << cost(79) << "\n"; //60+19 >>30+10=40$
+        //cout << cost(454) << "\n"; // 454-60*7 =34 min>>  30+(7-1)*20+ 10 +0  30+120+10=160$ 
+        //cout << cost(275) << "\n";//275-60*4 =35min >>    30+ 3*20   +10= 100$
+        //cout << cost(320) << "\n";//320-60*5=20 min   >>   30+4*20+10= 30+240+10=120 $
+        //cout << cost(131) << "\n";//131-2*60==11 min  >>    30+1*20+10  =60$
+        hours=n/60 ;//as fisrt hour allocated by +30 $
+        n = n - 60*hours;
+        hours = hours - 1;
+        cost += hours * (2 * 10);
+        if (n >= 30)
+        {
+            cost += 10;
+            n = n - 30;
+            if (n > 5) cost += 10;
+        }
+        else if (n >= 5)
+        {
+            cost += 10;
+        }
+        
+    }
+    return cost;
+}
+//methode 2 O(n/30) ~ O(n)
+unsigned cost(unsigned n) {  
+    int result = 0;
+    if (n < 60)
+        return 30;
+    else
+    {
+        if (n > 60)
+        {
+            result += 30;
+            n -= 60;
+        }
+        while (n >= 30)
+        {
+            result += 10;
+            n -= 30;
+        }
+        if (n > 5)
+        {
+            result += 10;
+        }
+    }
+    return result;
+}
+
+//methode 3 Very readable  O(1)
+
+unsigned cost(unsigned n)
+{
+    return n < 65 ? 30 : 30 + ceil((n - 65) / 30.0) * 10;
+}  
+//methode 4  //Readable,Uses floating-point trick for rounding>> O(1)
+unsigned cost(unsigned n) {
+    if (n <= 65) return 30;
+    return 30 + (static_cast<int>((n - 65) / 30.0 + .999)) * 10;
+}
+//methode 5  Uses integer math to avoid floating-point operations
+unsigned cost(unsigned n) {
+    if (n <= 65) { return 30; }
+    return 30 + ((n - 65 + 29) / 30) * 10;
+}
+int main() {
+    /*cout<<cost(45)<<"\n";
+    cout << cost(63) << "\n";
+    cout << cost(84) << "\n";
+    cout << cost(102) << "\n";
+    cout << cost(273) << "\n";*/
+    cout << cost(0) << "\n"; //0$
+    cout << cost(79) << "\n"; //60+19 >>30+10=40$
+    cout << cost(454) << "\n"; // 454-60*7 =34 min>>  30+(7-1)*20+ 10 +0  30+120+10=160$ 
+    cout << cost(275) << "\n";//275-60*4 =35min >>    30+ 3*20   +10= 100$
+    cout << cost(320) << "\n";//320-60*5=20 min   >>   30+4*20+10= 30+240+10=120 $
+    cout << cost(131) << "\n";//131-2*60==11 min  >>    30+1*20+10  =60$
+
+    //cout << shared_bits(10, 7)<<"\n";
+    // cout << shared_bits(10, 15)<<"\n";
+    // cout << shared_bits(10, 14)<<"\n";
+    //cout << shared_bits(10, 7)<<"\n";
+    //cout << shared_bits(15, 1) << "\n";   
+    return 0;
+}

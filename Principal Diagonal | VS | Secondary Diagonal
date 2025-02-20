@@ -1,22 +1,35 @@
-#include <string>
+ #include <string>
 #include <vector>
 
-std::string diagonal(const std::vector<std::vector<int>>& matrix)
-{
-    int size = matrix.at(0).size(), sum_pri_dig = 0, sum_sec_dig = 0;
-    for (int i = 0; i < size; i++)
+//methode 1 O(n*n)
+//std::string diagonal(const std::vector<std::vector<int>>& matrix)
+//{
+//    int size = matrix.at(0).size(), sum_pri_dig = 0, sum_sec_dig = 0;
+//    for (int i = 0; i < size; i++)
+//    {
+//        for (int j = 0; j < size; j++)
+//        {
+//            if(i==j)
+//            sum_pri_dig += matrix[i][j];
+//            if(i+j== size-1)
+//            sum_sec_dig += matrix[i][j];
+//        }
+//    }
+//    if (sum_pri_dig > sum_sec_dig)
+//        return "Principal Diagonal win!";
+//    else if (sum_pri_dig < sum_sec_dig)
+//            return "Secondary Diagonal win!";
+//    return "Draw!";
+//}
+//methode 1 O(n)
+std::string diagonal(std::vector<std::vector<int>> matrix) {
+    long long sum = 0;
+    int size = matrix.size();
+    for (unsigned int i = 0; i < matrix.size(); ++i)
     {
-        for (int j = 0; j < size; j++)
-        {
-            if(i==j)
-            sum_pri_dig += matrix[i][j];
-            if(i+j==size-1)
-            sum_sec_dig += matrix[i][j];
-        }
+        sum += matrix[i][i];
+        sum -= matrix[i][size - i - 1];
     }
-    if (sum_pri_dig > sum_sec_dig)
-        return "Principal Diagonal win!";
-    else if (sum_pri_dig < sum_sec_dig)
-            return "Secondary Diagonal win!";
-    return "Draw!";
-}
+
+    return sum == 0 ? "Draw!" : (sum > 0 ? "Principal Diagonal win!" : "Secondary Diagonal win!");
+};

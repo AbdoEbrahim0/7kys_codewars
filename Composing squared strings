@@ -1,0 +1,119 @@
+#include <string>
+#include <vector>
+using namespace std;
+/*
+class ComposeSqStrings
+{
+public:
+    static std::string compose(const std::string& s1, const std::string& s2)
+    {
+        //1:  {"abcd","efgh","ijkl","mnop"}
+        //2:  {"qrst","uvwx","yz12","3456"}
+        //3:  {"3456","yz12" ,"uvwx","qrst"} # reverse 2nd vector
+        //4:  {"a","ef","ijk","mnop"}    
+        //5:  {"3456","yz1","uv","q"}
+        //6: "a3456\nefyz1\nijkuv\nmnopq" add 4 & 5 at eanch index  
+        
+        string s = "";
+        int numOfChars = 0;
+        
+        vector<string> sep_s1, sep_s2;
+        
+        bool reach = true;
+        for (int i = 0; i < s1.size(); i++)
+        {
+            if (s1[i] == '\n')
+            {
+                sep_s1.push_back(s);
+                s = "";
+                reach = true;
+                numOfChars++;
+            }
+            else
+            {
+                for (int q = i; q <= i + numOfChars && reach; q++)
+                {
+                    s += s1[q];
+                    if (q == i + numOfChars) reach = false;
+                }
+            }
+        }
+        sep_s1.push_back(s);
+        s = "";
+        int vec_s1_size = sep_s1.size();
+
+        numOfChars = 0;
+        vector<string>my_s2 ;
+        for (int i = 0; i < s2.size(); i++)
+        {
+            if (s2[i] == '\n')
+            {
+                my_s2.push_back(s);
+                s = "";
+            }
+            else
+                s += s2[i];
+        }
+        my_s2.push_back(s);
+        s = "";
+        int vec_s2_size = my_s2.size();
+        
+        
+        reverse(my_s2.begin(), my_s2.end());
+        for (int j =0; j < vec_s2_size; j++)
+        {
+            numOfChars =  (my_s2.at(j).size() -1 ) - j;
+                for (int q = 0; q <= numOfChars; q++)
+                    s += my_s2.at(j)[q];
+            sep_s2.push_back(s);
+            s = "";
+        }
+        string output= "";
+        for (int z = 0; z < vec_s2_size; z++)
+        {
+            output = output + sep_s1.at(z) + sep_s2.at(z) + "\n";
+        }
+        output.pop_back();
+                return output;
+    };
+};
+*/
+class ComposeSqStrings {
+public:
+    static string compose(const string& s1, const string& s2) {
+        vector<string> lines1 = split(s1, '\n');
+        vector<string> lines2 = split(s2, '\n');
+        
+        reverse(lines2.begin(), lines2.end()); // Step 3: Reverse second vector
+
+        ostringstream result;
+        int n = lines1.size();
+
+        for (int i = 0; i < n; ++i) {
+            string left = lines1[i].substr(0, i + 1);       // Step 4: Take first (i+1) chars
+            string right = lines2[i].substr(0, n - i);      // Step 5: Take first (n-i) chars
+
+            result << left << right;
+            if (i < n - 1) result << '\n'; // Avoid extra newline at the end
+        }
+
+        return result.str();
+    }
+
+private:
+    static vector<string> split(const string& str, char delimiter) {
+        vector<string> tokens;
+        istringstream stream(str);
+        string line;
+        while (getline(stream, line, delimiter)) {
+            tokens.push_back(line);
+        }
+        return tokens;
+    }
+};
+int main() {
+    ComposeSqStrings obj;
+    cout<<obj.compose("abcd\nefgh\nijkl\nmnop", "qrst\nuvwx\nyz12\n3456");
+  
+    return 0;
+}

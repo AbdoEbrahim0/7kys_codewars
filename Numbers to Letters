@@ -1,0 +1,42 @@
+//methode 1 fast but it would be better if we replace loop with array of char O(1) look up
+std::string switcher(const std::vector<std::string>& arr) {
+    char c[29];
+    char ch='z';
+    for (int w = 0; w < 26; w++)
+    {
+        c[w] = ch;
+        ch--;
+    }
+    c[26] = '!';
+    c[27] = '?';
+    c[28] = ' ';
+    string s;
+    for (string val : arr)
+    {
+        
+        s += c[ stoi(val)-1];
+    }
+    return s;
+}
+// methode2 fastest O(1) look up
+std::string switcher(const std::vector<std::string>& arr) {
+    constexpr char lookup[] = "zyxwvutsrqponmlkjihgfedcba!? ";  // Predefined mapping
+    std::string s;
+
+    for (const std::string& val : arr) {
+        s += lookup[std::stoi(val) - 1];  // Direct lookup, O(1)
+    }
+
+    return s;
+}
+std::string switcher(const std::vector<std::string>& arr) {
+
+    std::string s = " ?!abcdefghijklmnopqrstuvwxyz"; //stored in read-only memory (ROM) and does not require initialization loops.
+    std::string result;
+
+    for (const std::string& n : arr) {
+        result = result + s[29 - stoi(n)];
+    }
+
+    return result;
+}

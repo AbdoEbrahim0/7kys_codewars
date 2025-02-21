@@ -1,0 +1,27 @@
+std::vector<long> numbersWithDigitInside(long x, long d)
+{
+    if (d > x || (d == 0 && x < 10) ) return { 0,0,0 };
+    long temp , num ;
+    int digit
+    long my_count = 0;
+    long s = 0;
+    long p = 1;
+    for (long i = 1; i <= x; i++)
+    {
+        temp = i;
+        num = temp;
+        while (num > 0)
+        {
+            digit = num % 10;
+            if (digit == d) { 
+                my_count++;
+                p *= temp;
+                s += temp;
+                break; //n=0;
+            }
+            num = num / 10;
+        }
+    }
+ //   cout << my_count << " " << s << " " << p;
+    return { my_count ,s,p };
+}

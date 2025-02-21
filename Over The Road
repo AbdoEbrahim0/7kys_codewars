@@ -1,0 +1,11 @@
+using namespace std;
+long long over_the_road(long long address, long long n) {
+    long plus2=0;
+    plus2 = (n - address)*2;
+    return  address + plus2+ 1;
+}
+using namespace std;
+long long over_the_road(long long address, long long n) {
+    
+    return  address + (n - address)*2 + 1;
+}

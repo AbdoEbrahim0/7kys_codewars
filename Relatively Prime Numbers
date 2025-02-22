@@ -1,0 +1,66 @@
+#include <vector>
+using namespace std;
+int gcd(int a, int b)
+{
+    int q, r;
+    if (a == 0) return b;
+    if (b == 0) return a;
+    if (a > b) swap(a, b);
+    q = b / a;
+    r = b - q * a;
+return  gcd(r, a);    
+}
+std::vector<int> relativelyPrime(int n, std::vector<int> list) {
+    vector<int>vec;
+    for (int val : list)
+    {
+        if (gcd(n, val) == 1)
+            vec.push_back(val);
+    }
+//     for (int c : vec)
+//         cout << c << " ";
+//     cout << "\n--------\n";
+    return vec;
+}
+
+vector<int> relativelyPrime(int n, vector<int> list) {
+	for (size_t i = 0; i < list.size(); i++) {
+		for (size_t j = 2; j <= min(n, list[i]); j++) {
+			if ((n % j == 0 && list[i] % j == 0)) {
+				list.erase(list.begin() + i); // Correctly erasing the element at index i
+				i--; // Adjust index to account for the removed element
+				break; // Exit the inner loop since we erased the element
+			}
+		}
+	}
+	return list;
+}
+int main() {
+    relativelyPrime(8, { 1, 2, 3, 4, 5, 6, 7 });
+    relativelyPrime(15, { 72, 27, 32, 61, 77, 11, 40 }); 
+    relativelyPrime( 210,{ 15, 100, 2222222, 6, 4, 12369, 99 });
+return 0;
+}
+
+std::vector<int> relativelyPrime(int n, std::vector<int> list) {
+    std::vector<int> result;
+
+    for (int i = 0; i < list.size(); i++) {
+        int div = 2;
+        bool isRelativelyPrime = true;
+
+        while (div <= n) {  // Looping from 2 to n
+            if (n % div == 0 && list[i] % div == 0) {
+                isRelativelyPrime = false;
+                break;
+            }
+            div++;
+        }
+
+        if (isRelativelyPrime) {
+            result.push_back(list[i]);
+        }
+    }
+
+    return result;
+}

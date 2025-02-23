@@ -1,0 +1,15 @@
+include <vector>
+using namespace std;
+std::vector<int> L(int n, int L0, int L1, int add)
+{
+    vector<int> vec;
+    vec.push_back(L0);
+    vec.push_back(L1);
+    int sum=0;
+    for (int i = 2; i < n; i++)
+    {
+        sum=vec.at(i - 2) + vec.at(i - 1) +add;
+        vec.push_back(sum);
+    }
+    return vec;
+}

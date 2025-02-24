@@ -1,0 +1,114 @@
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <numeric>
+#include<sstream>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <list>
+#include<unordered_set>
+#include <bitset>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <map>
+#include <set>
+using namespace std;
+//methode 1 >> O(N^2) becuse of substrFn 
+//class PartList
+//{
+//public:
+//    //a = ["az", "toto", "picaro", "zone", "kiwi"] -->
+//    //[["az", "toto picaro zone kiwi"], ["az toto", "picaro zone kiwi"], ["az toto picaro", "zone kiwi"], ["az toto picaro zone", "kiwi"]]
+//    static std::vector<std::pair <std::string, std::string>> partlist(std::vector<std::string>& arr)
+//    {
+//        vector< pair<string, string> >out;
+//        pair<string, string>my_pair;
+//        int arr_size = arr.size();
+//        string part_1 = "", part_2 = "";
+//        for (int j = 0; j < arr_size; j++)
+//        {
+//            part_2 += arr.at(j);
+//            if (j != arr_size - 1)
+//                part_2 += " ";
+//        }
+//        for (int i=0;i< arr_size -1;i++)
+//        {
+//            part_1 += arr.at(i);
+//            part_2 = part_2.substr(arr.at(i).size() + 1);
+//            /*my_pair.first = part_1;
+//            my_pair.second = part_2;*/
+//            out.push_back(make_pair(part_1,part_2));
+//            if (i != arr_size - 1)
+//                part_1 += " ";
+//        }
+//        return out;
+//    };
+//};
+    //methode 2  O(N) because using erase instead of substrFn
+class PartList
+{
+public:
+    //a = ["az", "toto", "picaro", "zone", "kiwi"] -->
+    //[["az", "toto picaro zone kiwi"], ["az toto", "picaro zone kiwi"], ["az toto picaro", "zone kiwi"], ["az toto picaro zone", "kiwi"]]
+    static std::vector<std::pair <std::string, std::string>> partlist(std::vector<std::string>& arr)
+    {
+        vector< pair<string, string> >out;
+        int arr_size = arr.size();
+        string part_1 = "", part_2 = "";
+        for (int j = 0; j < arr_size; j++)
+        {
+            part_2 += arr.at(j);
+            if (j != arr_size - 1)
+                part_2 += " ";
+        }
+        for (int i = 0; i < arr_size - 1; i++)
+        {
+            part_1 += arr.at(i);
+            part_2 = part_2.erase(0, arr.at(i).size() + 1);
+            out.emplace_back(part_1, part_2 );// avoid creating temporary objects instead of push_back
+            if (i != arr_size - 1)
+                part_1 += " ";
+        }
+        return out;
+    };
+};
+        //methode 3
+//class PartList
+//{
+//public:
+//    static std::vector<std::pair <std::string, std::string>> partlist(std::vector<std::string>& arr)
+//    {
+//        std::vector<std::pair <std::string, std::string>> rtn;
+//        std::string ss;
+//        for (std::string& s : arr)
+//            ss += " " + s;
+//        //ss.erase(0, 1);
+//        ss.erase(ss.begin());
+//        int size = 0;
+//        for (int i = 0; i < arr.size() - 1; i++)
+//        {
+//            size += arr[i].length();
+//            rtn.push_back(std::make_pair(ss.substr(0, size + i), ss.substr(size + i + 1, ss.length())));
+//        }
+//
+//        return rtn;
+//    }
+//};
+int main() {
+    vector<string> in = { "az", "toto", "picaro", "zone", "kiwi" };
+
+    PartList obj;
+    obj.partlist(in);
+    //string s = "az toto";
+    //cout << s.substr(3);
+    return 0;
+}

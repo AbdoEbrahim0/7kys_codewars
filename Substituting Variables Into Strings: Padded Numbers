@@ -1,0 +1,61 @@
+//methode 1 
+// More string operations to_string(n)
+// zeros(5 - sizeOfDigits, '0'), and "Value is " + zeros + s all require dynamic memory allocation.
+// Concatenation overhead: "Value is " + zeros + s
+// Potentially slower for large numbers: to_string(n) and string operations involve extra heap allocations, which add some overhead. 
+// solution(5); // should return "Value is 00005"
+//solution(1204), Equals("Value is 01204")
+std::string solution(int n) {
+    string s = to_string(n);//O(1)
+    int sizeOfDigits = s.size();
+    string zeros(5 - sizeOfDigits, '0');
+    return "Value is "+zeros+s;
+}
+//methode 2 
+//No extra string allocations("00000" is modified in place).
+//Avoids concatenation overhead("Value is " + s is faster than "Value is " + zeros + s).
+//Runs in O(1) time(at most 5 iterations).
+//Memory - efficient: Uses a fixed - size string instead of dynamically creating new strings.
+std::string solution(int n) {
+    string s = "00000";
+    int digit;
+    for (int i = s.size() - 1; i >= 0; i--)// O(N-how many digits) //o(1) because it is fixed number 5 digits always
+    {
+        digit = n % 10;
+        n /= 10;
+        s[i] = digit + '0';
+        if (n == 0)break;
+    }
+    return "Value is "+ s;
+}
+
+std::string solution(int n) {
+    string s = "00000";
+    int digit;
+    for (int i = s.size() - 1; i >= 0; i--)// O(N-how many digits) //o(1) because it is fixed number 5 digits always
+    {
+        digit = n % 10;
+        n /= 10;
+        s[i] = digit + '0';
+        if (n == 0)break;
+    }
+    return "Value is " + s;
+}
+//faster methode 
+std::string solution(int n) {
+    char s[6] = "00000"; // Fixed-size char array (stack allocation, no heap usage)
+    int i = 4;  // Start from the last position
+    while (n > 0) {
+        s[i--] = (n % 10) + '0'; // Convert digit to char and place in array
+        n /= 10;
+    }
+    return "Value is " + std::string(s); // Convert char array to std::string
+}
+
+std::string solution(const int n)
+{
+    std::string str = "00000";
+    str += std::to_string(n);
+
+    return "Value is " + str.substr(str.length() - 5, 5);
+}

@@ -1,0 +1,62 @@
+class GpsSpeed
+{
+public:
+    static int gps(int s, std::vector<double>& x)
+    {
+        int x_size = x.size();
+        double LastElement = x[x_size - 1] -x[x_size - 2];
+        int max = 0;
+        for (int i = 0; i < x_size -1; i++)
+        {
+            x[i] = x[i + 1] - x[i];
+            x[i] = 3600 * x[i] / s;
+            if (x[i] > max)
+                max = x[i];
+        }
+        x[x_size - 1] = 3600 *  LastElement /s;
+        if (x[x_size - 1] > max)
+            max = x[x_size - 1];
+        return (max);
+    }
+};
+//methode 2
+class GpsSpeed
+{
+public:
+    static int gps(int s, std::vector<double>& x)
+    {
+        int x_size = x.size();
+        if (x_size < 2) return 0;
+        double LastElement = x[x_size - 1] - x[x_size - 2];
+        int max_speed = 0;
+        for (int i = 0; i < x_size - 1; i++)
+        {
+            x[i] = x[i + 1] - x[i];
+            x[i] = 3600 * x[i] / s;
+            if (x[i] > max_speed)
+                max_speed = x[i];
+        }
+        x[x_size - 1] = 3600 * LastElement / s;
+        if (x[x_size - 1] > max_speed)
+            max_speed = x[x_size - 1];
+        return max_speed;
+    }
+};
+
+//methode 3
+class GpsSpeed
+{
+public:
+    static int gps(int s, std::vector<double>& x)
+    {
+        int x_size = x.size();
+        if (x_size < 2) return 0;
+        int max_speed = 0;
+        for (int i = 1; i < x_size; i++)
+        {
+            int speed = (3600 * (x[i] - x[i - 1])) / s;
+            max_speed = std::max(max_speed, speed);
+        }
+        return (max_speed);
+    }
+};

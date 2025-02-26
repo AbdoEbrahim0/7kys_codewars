@@ -1,0 +1,37 @@
+//methode 1 
+//unsigned int cookingTime(unsigned int eggs) {
+//    if (eggs == 0) return  0;
+//    if (eggs < 9) return 5;
+//    int factorToTime = 0;
+//    for (int i = eggs ; i > 0; i -= 8)
+//    {
+//        factorToTime += 5;
+//    }
+//    //factorToTime += 5;
+//    return factorToTime;
+//    //your code here 
+//}
+//methode 2
+unsigned int cookingTime(unsigned int eggs) { //fail in random test case
+    if (eggs == 0) return  0;
+//    int factorToTime = (eggs / 8)+0.999; //fail in  all tests case
+    int factorToTime = (eggs / 8.0) + 0.999; //pass in all tests
+    return factorToTime*5;
+    //your code here 
+}
+//methode 3
+unsigned int cookingTime(unsigned int eggs) { 
+    int factorToTime = ceil(eggs / 8.0);   //pass in random test case !!!
+//    int factorToTime = ceil((float)eggs / 8);//fail in random test case    
+    return factorToTime * 5;
+    //your code here 
+}
+
+int main() {
+    //cookingTime(16);
+    double num = 4.000000000000000000001;
+    double  rounded = std::ceil(num); // Rounds up to 5
+
+    std::cout << "Rounded value: " << rounded << std::endl;
+    return 0;
+}

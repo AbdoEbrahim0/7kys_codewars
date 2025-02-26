@@ -1,0 +1,65 @@
+//"www.codewars.com#about" -- > "www.codewars.com"
+//"www.codewars.com?page=1" -- > "www.codewars.com?page=1"
+//methode 1  if i want to get pure url of site only
+
+//std::string replaceAll(std::string str) {
+//    for (int i = 0; i < str.size(); i++)
+//    {
+//        if  (!(str[i] >= 'a' && str[i] <= 'z'))
+//        {
+//            if (! (str[i] == '.' || str[i] == '@' || str[i] == ':'|| str[i] == '/'))
+//            {
+//                str = str.substr(0, i);
+//                break;
+//            }
+//        }
+//    }
+//    return str;
+//}
+//methode 2
+//std::string replaceAll(std::string str) {
+//    for (int i = 0; i < str.size(); i++)
+//    {
+//                str = str.substr(0, i);
+//                break;
+//    }
+//    return str;
+//}
+//methode 2 optimized O( less than N) =O(N/2)
+//std::string replaceAll(std::string str) {
+//    for (int i = 0, last = str.size() - 1; i < str.size(); i++, last--)
+//    {
+//        if (str[i] == '#')
+//        {
+//            //str = str.substr(0, i);
+//            str.resize(i);// // Efficiently trims without creating a new string
+//              break;
+//        }
+//        if (str[last] == '#')
+//        {
+//            //str = str.substr(0, last);
+//            str.resize(last); // Efficiently trims without creating a new string
+//            break;
+//        }
+//    }
+//    return str;
+//}
+//methode 2 optimized more
+//std::string replaceAll(std::string str) {
+//    size_t pos = str.find('#');  // Finds first occurrence of '#' jumps to it directly
+//    if (pos != std::string::npos) {
+//        str.resize(pos);  // Efficiently trims without looping
+//    }
+//    return str;
+//}
+
+        //methode 3 It's slower and consumes more memory.
+#include <regex>
+std::string replaceAll(std::string str) {
+    //Matches everything (. any character, * zero or more times) until the end of the string.& replace i twith ""
+    return std::regex_replace(str, std::regex{ "\#.*" }, "");
+}
+int main() {
+    replaceAll("www.codewars.com#about");
+    return 0;
+}

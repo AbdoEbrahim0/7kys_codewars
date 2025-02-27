@@ -1,0 +1,75 @@
+        // methode 1  O(log n) 2nd fastest
+int layers(int n)
+{
+    /*
+  layer  denote with it by x   : 1 , 2 , 3 , 4 , 5 , 6 , 7
+  max number can be in  layer  : 1 , 9 , 25, 49, 81,121, 169
+  number root                  : 1 , 3 , 5 , 7 , 9 , 11, 13
+  relize that (7+6)=13 ,(6+5)=11 ,(5+4)=9
+  as long as n <(max number can be in layer) it will be in previous layer x--
+  to avoid over flow we get benifit from non negative n and use unsinged long long data type
+    */
+    //cout<<"n "<<n<<endl;
+    if (n == 1) return 1;
+    long long  x = sqrt(n); //long long is 64-bit and can store values up to 9,223,372,036,854,775,807
+     //int x = sqrt(n); //will over flow This exceeds the max limit of a 32-bit int, which is 2,147,483,647
+    while (n <= (x + (x - 1)) * (x + (x - 1)))
+    {
+        if (n == (x + (x - 1)) * (x + (x - 1))) return x;
+        x--;
+    }
+    return (x + 1);
+}
+        // methode 2 	O(sqrt(n))
+int layers(int n)
+{
+    int layer = 1;
+    int i = 1;
+    int square = i * i;
+    while (square < n)
+    {
+        i = i + 2;
+        layer = layer + 1;
+        square = i * i;
+    }
+    return layer;
+}
+        // methode 3 O(1) fastest 
+int layers(int n) {
+    return std::ceil((std::sqrt(n) + 1) / 2);
+}
+        // methode 4 O(1) ~ O(sqrt(n)) slowest
+int layers(int n) {
+    if (int(sqrt(n)) == sqrt(n)) return sqrt(n) - int(sqrt(n) / 2);
+    else {
+        while (int(sqrt(n)) != sqrt(n)) --n;
+        return 1 + sqrt(n) - int(sqrt(n) / 2);
+    }
+}
+int main() {
+    /*cout << layers(1) << "\n";
+    cout << layers(5) << "\n";
+    cout << layers(25) << "\n";
+    cout << layers(30) << "\n";
+    cout << layers(50) << "\n";
+    cout << layers(49) << "\n";*/
+
+    //cout << layers(870) << "\n";//16
+    //cout << layers(22350) << "\n";//76
+    //cout << layers(4419) << "\n";//34
+    //cout << layers(51752) << "\n";//115
+    //cout << layers(903) << "\n";//16
+    //cout << layers(6) << "\n";//2
+
+    //cout << layers(4319866) << "\n";//1040
+    //cout << layers(70273647) << "\n";//4192
+    //cout << layers(97514592) << "\n";//4938
+    //cout << layers(7104) << "\n";//43
+    //cout << layers(32029) << "\n";//90
+    //cout << layers(803630985) << "\n";//28349  Expected: equal to 14175 Actual: 28349
+
+    cout << sqrt(803630985)<<"\n";
+
+    cout<< (803630985 + (803630985 - 1)) * (803630985 + (803630985 - 1)) << "\n";
+    return 0;
+}

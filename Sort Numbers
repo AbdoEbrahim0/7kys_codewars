@@ -1,0 +1,41 @@
+        // methode 1 O(N^2) bubble sort
+//std::vector<int> solution(std::vector<int> nums) {
+//    
+//    for (int j = 0; j < nums.size(); j++)
+//    {
+//        for (int i = 0; i < nums.size() -1; i++)
+//        {
+//            if (nums[i + 1] < nums[i])
+//            {
+//                swap(nums[i + 1], nums[i]);
+//            }
+//        }
+//    }
+//        return nums;
+//}
+
+std::vector<int> solution(std::vector<int> nums) {// methode 1 O(N^2) selection sort
+// void solution(std::vector<int>& nums) { // methode 1 [optimized] O(N^2) selection sort by pass by reference & and convert to void remove return 
+    int min;
+    for (int j = 0; j < nums.size(); j++)
+    {
+        min = j;
+        for (int i = j; i < nums.size(); i++)
+        {
+            if (nums[i] < nums[min])
+            {
+                min = i;
+            }
+        }
+        if( nums[min]<nums[j])
+        swap(nums[j], nums[min]);
+    }
+    return nums;
+}
+
+
+int main() {
+    vector<int>v = { 5,8,50,20,4 };
+    solution(v);
+    return 0;
+}

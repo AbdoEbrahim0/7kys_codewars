@@ -1,0 +1,49 @@
+        // methode 1  O(N*M) inefficent using for erase fn 
+//integers = { 1, 1, 2 ,3 ,1 ,2 ,3 ,4 };
+//values = { 1, 3 };
+//expected = { 2, 2, 4 };
+//std::vector <int> remove_values(std::vector<int> integers, std::vector<int> values) {
+//    for (int v=0 ;v<values.size();v++)
+//    {
+//        for (int vv=0 ;vv< integers.size();vv++)
+//        {
+//            if (values[v] == integers[vv])
+//            {
+//                integers.erase(integers.begin() + vv); 
+//                vv--;
+//            }
+//        }
+//    }
+//    return integers;
+//}
+        // methode 2  O(N*M) inefficent using for erase fn 
+//std::vector <int> remove_values(std::vector<int>& integers, std::vector<int> values) { //O(N)*O(K)
+//    for (int & v : values)
+//    {
+//        integers.erase(remove(integers.begin(), integers.end(), v), integers.end());
+//    }
+//    return integers;
+//}
+        // methode 3  O(N+M)
+//vector<int> remove_values(vector<int> a, vector<int> b) {
+//    unordered_set<int> s(b.begin(), b.end());
+//    vector<int> r;
+//    for (int x : a) 
+//        if (!s.count(x))
+//            r.push_back(x);
+//    return r;
+//}
+        // methode 4  O(N+M)
+std::vector<int> remove_values(std::vector< int > integers, std::vector< int > values) { 
+    std::unordered_set< int > extra(values.cbegin(), values.cend());
+    std::vector< int > result;
+    for (const int number : integers)
+        if (extra.find(number) == extra.cend())
+            result.push_back(number);
+    return result;
+}
+int main() {
+    vector <int>v{ 1, 1, 2, 3, 1, 2, 3, 4 };
+    remove_values(v, { 1,3 });
+     return 0;
+}

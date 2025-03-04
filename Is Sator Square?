@@ -1,0 +1,204 @@
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <regex>
+#include <numeric>
+#include <stdlib.h>
+#include <numeric>
+#include<sstream>
+#include <cstdint>
+#include <array>
+#include <utility>
+#include <list>
+#include<unordered_set>
+#include <bitset>
+#include <string>
+#include <cmath>
+#include <vector>
+#include <map>
+#include <set>
+#include <queue>
+using namespace std;
+
+
+
+          // methode 1 O(N)
+//bool any_odd(unsigned x) {
+//    int idx = 0;
+//    while (x != 0)
+//    {
+//        if (idx % 2 != 0) //any oddd bit if 1 return true 
+//        {
+//            if (x % 2 == 1)
+//                return true;
+//        }
+//        idx++;;
+//        x = x / 2;
+//    }
+//    return false;
+//}
+        // methode 2 O(1)
+//int any_odd(unsigned x) {
+//    auto d = 0xAAAAAAAA;
+//    return ((x & 0xAAAAAAAA) ==x) ? 1 : 0;
+//}
+        // methode 3 O(N)
+//int any_odd(unsigned x) {
+//    std::string str = std::bitset<std::numeric_limits<unsigned>::digits>(x).to_string();
+//
+//    for (int i = str.size() - 1; i >= 0; i--)
+//    {
+//        if ((str.size() - 1 - i) % 2 == 1 && str[i] == '1')
+//            return 1;
+//    }
+//    return 0;
+//}
+        // methode 1  O(size) =O(N) 
+//bool is_sator_square(std::vector<std::vector<char>> tablet, int row_col = 0) {
+//
+//    if (tablet.at(0).size() / 2 == row_col) return true;
+//    string s1, s2, s3, s4;
+//    int size_n = tablet.at(0).size() - row_col;
+//
+//    for (int L_R = 0 + row_col, R_L = size_n - 1; L_R < size_n; L_R++, R_L--)
+//    {
+//        s1 += tablet.at(0 + row_col).at(L_R);
+//        s2 += tablet.at(size_n - 1).at(R_L);
+//    }
+//
+//    for (int T_B = 0 + row_col, B_T = size_n - 1; T_B < size_n; T_B++, B_T--)
+//    {
+//        s3 += tablet.at(T_B).at(0 + row_col);
+//        s4 += tablet.at(B_T).at(size_n - 1);
+//    }
+//    if (s1 == s2 && s1 == s3 && s1 == s4) return is_sator_square(tablet, ++row_col);
+//    else return false;
+//
+//    return false;
+//}
+
+//methode 1 optimize using array of characters but fail in random test case
+//bool is_sator_square(vector<vector<char>> tablet, int row_col = 0) {
+//    int size_n = tablet.size() - row_col;
+//
+//    if (size_n <= 1) return true;
+//
+//    char s_1[sizeof(tablet.at(0).size()) / sizeof(char)  + 1] = {}, s_2[sizeof(tablet.at(0).size()) / sizeof(char) + 1] = {};
+//    char s_3[sizeof(tablet.at(0).size()) / sizeof(char) + 1] = {}, s_4[sizeof(tablet.at(0).size()) / sizeof(char) + 1] = {};
+//
+//    unsigned int inxOfchar = 0;
+//    for (int L_R = row_col, R_L = size_n - 1; L_R < size_n; L_R++, R_L--) {
+//        s_1[inxOfchar] = tablet[row_col][L_R];
+//        s_2[inxOfchar] = tablet[size_n - 1][R_L];
+//        inxOfchar++;
+//    }
+//
+//    inxOfchar = 0;
+//    for (int T_B = row_col, B_T = size_n - 1; T_B < size_n; T_B++, B_T--) {
+//        s_3[inxOfchar] = tablet[T_B][row_col];
+//        s_4[inxOfchar] = tablet[B_T][size_n - 1];
+//        inxOfchar++;
+//    }
+//
+//    bool flag = true;
+//    for (unsigned int x = 0; x < size_n; x++) {
+//        if (s_1[x] != s_2[x] || s_1[x] != s_3[x] || s_1[x] != s_4[x]) {
+//            flag = false;
+//            break;
+//        }
+//    }
+//
+//    if (flag) {
+//        return is_sator_square(tablet, row_col + 1);
+//    }
+//
+//    return false;
+//}
+
+//methode 3 O(N^2)
+bool is_sator_square(std::vector<std::vector<char>> tablet) {
+    size_t n = tablet.size();
+    size_t d = n / 2;
+    size_t m = n - 1;
+    for (size_t r = 0; r < d; r++) {
+        for (size_t c = r; c < n - r; c++) {
+            size_t y = m - r;
+            size_t x = m - c;
+            char current = tablet[r][c];
+            if (current != tablet[c][r] ||
+                current != tablet[y][x] ||
+                current != tablet[x][y]) return false;
+        }
+    }
+    return true;
+}
+//methode 3
+bool is_sator_square(vector<vector<char>> tablet)
+{
+    string fW, sW, tW, foW;
+    vector<string> res;
+    int tablet_size = tablet.size();
+    for (int i = 0; i < tablet_size; i++)
+    {
+        for (int j = 0; j < tablet_size; j++)
+        {
+            fW += tablet[i][j]; sW += tablet[j][i];
+            tW += tablet[i][tablet_size - j - 1];
+            foW += tablet[tablet_size - j - 1][tablet_size - i - 1];
+        }
+        res.push_back(fW); res.push_back(sW); res.push_back(tW); res.push_back(foW);
+        fW = sW = tW = foW = "";
+    }
+    for (int i = 0; i < res.size(); i++)
+    {
+        if (count(res.begin(), res.end(), res[i]) < 4)
+            return false;
+    }
+    return true;
+}
+
+bool is_sator_square(std::vector<std::vector<char>> tablet) {
+    int ROWS = tablet.size();
+    int COLS = tablet[0].size();
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            if (tablet[i][j] != tablet[COLS - 1 - i][ROWS - 1 - j] || tablet[i][j] != tablet[j][i]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+//methode 5
+bool is_sator_square(std::vector<std::vector<char>> tablet) {
+    const int N = tablet.size();
+
+    for (int i = 0; i < N; i++) {
+        for (int j = i; j > 0; j--) {
+            // diagonal upper left to lower right
+            if (tablet[i][i - j] != tablet[i - j][i])
+                return false;
+            // diagonal lower left to upper right      
+            if (tablet[N - 1 - i][i - j] != tablet[N - 1 - i + j][i])
+                return false;
+        }
+    }
+    return true;
+}
+//methdode 6
+bool is_sator_square(const std::vector<std::vector<char>>& tablet) {
+    const std::size_t size = tablet.size();
+    for (std::size_t i = 0; i < size / 2; ++i) {
+        for (std::size_t j = 0; j < size; ++j) {
+            if (tablet[i][j] != tablet[size - i - 1][size - j - 1]) return false;
+            if (tablet[j][i] != tablet[size - j - 1][size - i - 1]) return false;
+            if (tablet[j][i] != tablet[size - i - 1][size - j - 1]) return false;
+            if (tablet[i][j] != tablet[size - j - 1][size - i - 1]) return false;
+        }
+    }
+    return true;
+}

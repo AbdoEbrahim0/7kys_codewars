@@ -1,0 +1,62 @@
+#include <vector>
+#include <cmath>
+using namespace std;
+std::vector<int> eqSumPowdig(const int hMax, const int exp) {
+    
+    if (exp == 2)
+        return {};
+    vector<int> v;
+    int repeat;
+    int start = 153, t;
+    int  digit = 0, sum = 0;
+    while (true)
+    {
+        digit = 0, sum = 0;
+
+        t = start;
+        for (; t != 0;)
+        {
+            digit = t % 10;
+            repeat = digit;
+            for (int d = 1; d < exp; d++)
+                digit = repeat * digit;
+            sum += digit;
+            t /= 10;
+        }
+        if (sum == start)
+            v.push_back(start);
+        start++;
+        if (start > hMax) break;
+    }
+    return v;
+}
+
+#include <vector>
+#include <cmath>
+using namespace std;
+
+vector<int> eqSumPowdig(int hMax, int exp) {
+    if (exp == 2) return {};  // No valid numbers for exp = 2
+
+    vector<int> result;
+    int power[10];  // Store 0^exp to 9^exp
+
+    // Precompute digit powers
+    for (int i = 0; i < 10; i++) {
+        power[i] = pow(i, exp);
+    }
+
+    for (int num = 153; num <= hMax; num++) {
+        int sum = 0, temp = num;
+
+        // Compute sum of digits raised to the given exponent
+        while (temp > 0) {
+            sum += power[temp % 10]; // Use precomputed values
+            temp /= 10;
+        }
+
+        if (sum == num) result.push_back(num);
+    }
+
+    return result;
+}

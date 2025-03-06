@@ -1,0 +1,41 @@
+int timed_reading(int maxLength, const std::string& text)
+{
+    int c = 0, countOfWords = 0, sizeText = text.size();
+
+    for (int i = 0; i < sizeText; i++)
+    {
+        if (text[i] == ' ')
+        {
+            if (c <= maxLength)
+            {
+                countOfWords++;
+            }
+            c = 0;
+        }
+        else if( (text[i] >='a' && text[i] <='z' ) || (text[i] >= 'A' && text[i] <= 'Z') )
+        {
+            c++;
+        }
+    }
+    if (c <= maxLength && c!=0)
+    {
+        countOfWords++;
+    }
+    return countOfWords; //coding and coding..
+}
+int timed_reading(int maxLength, const std::string& text) {
+    int countOfWords = 0, wordLength = 0;
+
+    for (char ch : text) {
+        if (std::isalpha(ch)) {  // Check if the character is a letter
+            wordLength++;
+        }
+        else if (wordLength > 0) {  // Word ended
+            if (wordLength <= maxLength) countOfWords++;
+            wordLength = 0;  // Reset for next word
+        }
+    }
+    // Check last word if it was not counted
+    if (wordLength > 0 && wordLength <= maxLength) countOfWords++;
+    return countOfWords;
+}

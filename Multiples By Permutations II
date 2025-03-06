@@ -1,0 +1,47 @@
+//methode 1   
+//bool checkIfHasSameDigits(unsigned long long n1, unsigned long long n2)
+//{
+//    string s1 =to_string(n1), s2 = to_string(n2);
+//    if (s1.size() != s2.size()) return false;
+//    for (char c : s1)
+//    {
+//        auto it = find(s2.begin(), s2.end(), c);
+//        if (it == s2.end()) //did not find
+//            return false;
+//        else
+//            s2.erase(it);
+//    }
+//    return true;
+//}
+         // methode 2 get benifit from find() complexity fn in different container
+bool checkIfHasSameDigits(unsigned long long n1, unsigned long long n2)
+{
+    string s1 = to_string(n1), s2 = to_string(n2);
+    if (s1.size() != s2.size()) return false;
+    for (char c : s1)
+    {
+        auto it = find(s2.begin(), s2.end(), c);
+        if (it == s2.end()) //did not find
+            return false;
+        else
+            s2.erase(it);
+    }
+    return true;
+}
+unsigned long findLowestInt(unsigned int k) {
+    unsigned int k2 = k + 1;
+    unsigned long  n = 1;
+    while (true)
+    {
+        if (checkIfHasSameDigits(n * k, n * k2))
+            return n;
+        else
+            n++;
+    }
+    return 0;
+}
+int main() {
+    //findLowestInt(325); //#Because 477 * 325 = 155025 ,477 * 326 = 155502
+    findLowestInt(100); //(100) === 8919
+    return 0;
+}

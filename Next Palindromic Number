@@ -1,5 +1,5 @@
 
-//methode 1 bruteforce o(N)
+//methode 1 bruteforce o(n log N) //slowest
 //unsigned int nextPal(const unsigned int val) {
 //    //your code here
 //    string s; bool found = true;
@@ -22,38 +22,46 @@
 //    }
 //    return 0;
 //}
-// methode  2 OPtimized o(logN)*
-unsigned int nextPal(unsigned int val) {
-    string s = to_string(val);
-    int n = s.size();
-
+        // methode  2 OPtimized o(logN)* fastest
+//unsigned int nextPal(unsigned int val) {
+//    string s = to_string(val);
+//    int n = s.size();
+//    while (true) {
+//        // Mirror the first half to the second half
+//        for (int i = 0; i < n / 2; i++)
+//            s[n - 1 - i] = s[i];
+//
+//        // Convert back to number
+//        unsigned int newVal = stoi(s);
+//
+//        if (newVal > val)
+//            return newVal; // Found the next palindrome
+//
+//        // If newVal is not greater, increment the middle part
+//        int mid = (n - 1) / 2;
+//
+//        // Increment middle part and propagate the carry
+//        while (mid >= 0 && s[mid] == '9') {
+//            s[mid] = '0';
+//            mid--;
+//        }
+//        if (mid < 0) {       // If the entire number was 999...999, then we need 100...001
+//            s = "1" + string(n - 1, '0') + "1";
+//        }
+//        else {
+//            s[mid]++;
+//        }
+//    }
+//}
+//methode 3 O(sqrt(n) log n) fast
+unsigned nextPal(unsigned x) { 
     while (true) {
-        // Mirror the first half to the second half
-        for (int i = 0; i < n / 2; i++)
-            s[n - 1 - i] = s[i];
-
-        // Convert back to number
-        unsigned int newVal = stoi(s);
-
-        if (newVal > val)
-            return newVal; // Found the next palindrome
-
-        // If newVal is not greater, increment the middle part
-        int mid = (n - 1) / 2;
-
-        // Increment middle part and propagate the carry
-        while (mid >= 0 && s[mid] == '9') {
-            s[mid] = '0';
-            mid--;
-        }
-
-        // If the entire number was 999...999, then we need 100...001
-        if (mid < 0) {
-            s = "1" + string(n - 1, '0') + "1";
-        }
-        else {
-            s[mid]++;
-        }
+        x++;
+        unsigned y = 0;
+        for (unsigned t = x; t != 0; t /= 10)
+            y = y * 10 + t % 10;
+        if (x == y)
+            return x;
     }
 }
 int main() {
@@ -63,6 +71,5 @@ int main() {
     cout << nextPal(188) << "\n"; //191
     cout << nextPal(191) << "\n";  //202
     cout << nextPal(2541) << "\n"; //2552
-
        return 0;
 }

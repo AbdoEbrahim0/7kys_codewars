@@ -16,8 +16,25 @@
          // methode 2 get benifit from find() complexity fn in different container
 bool checkIfHasSameDigits(unsigned long long n1, unsigned long long n2)
 {
+    int s1_size = 0, s2_size = 0, digit;
+    unsigned long long copyOfN1 =n1, copyOfN2=n2;
+    string s1 = "", s2 = "";
+    while (copyOfN1 !=0) // to avoid heat
+    {
+        digit = copyOfN1 % 10;
+        //s1 += digit + '0'; // bad as it re-allocate memry in loop so instead use to_string Fn 
+        copyOfN1 =copyOfN1 / 10;
+        s1_size++;
+    }
+    while (copyOfN2 != 0)
+    {
+        digit = copyOfN2 % 10;
+        //s2 += digit + '0'; // bad as it re-allocate memry in loop so instead use to_string Fn 
+        copyOfN2 = copyOfN2 / 10;
+        s2_size++;
+    }
+    if (s1_size != s2_size) return false;
     string s1 = to_string(n1), s2 = to_string(n2);
-    if (s1.size() != s2.size()) return false;
     for (char c : s1)
     {
         auto it = find(s2.begin(), s2.end(), c);
@@ -28,9 +45,42 @@ bool checkIfHasSameDigits(unsigned long long n1, unsigned long long n2)
     }
     return true;
 }
+// methode 3 using sorting fn O(N)  
+//bool checkIfHasSameDigits(unsigned long long n1, unsigned long long n2) {
+//    vector<int >freq1 = {}; // Frequency array for digits 0-9
+//    vector<int > freq2= {}; // Frequency array for digits 0-9
+//                       // Count digits in n1
+//    int  digit;//,indx=0;
+//    int counterOfDigits = 0;
+//        while (n1!=0) // to avoid heat
+//    {
+//        digit = n1% 10;
+//        n1 =n1 / 10;
+//        freq1.push_back(digit);
+//        counterOfDigits++;
+//    }
+//    while (n2 != 0)
+//    {
+//        digit = n2% 10;
+//        n2 = n2/ 10;
+//        freq2.push_back(digit);
+//        counterOfDigits--;
+//    }
+//    if (counterOfDigits != 0) return false;
+//    sort(freq1.begin(),freq1.end());
+//    sort(freq2.begin(), freq2.end());
+//
+//    // If all values in freq are 0, they have the same digits
+//    int max_size = freq1.size() > freq2.size() ? max_size = freq1.size() : max_size = freq2.size();
+//    for (int i = 0; i < max_size; i++) {
+//        if (freq1[i] != freq2[i]) return false;
+//    }
+//    return true;
+//}
+//
 unsigned long findLowestInt(unsigned int k) {
     unsigned int k2 = k + 1;
-    unsigned long  n = 1;
+    unsigned long  n = 476;
     while (true)
     {
         if (checkIfHasSameDigits(n * k, n * k2))
@@ -40,8 +90,31 @@ unsigned long findLowestInt(unsigned int k) {
     }
     return 0;
 }
+//methode 4 best sol O(N)
+bool checkIfHasSameDigits(unsigned long long n1, unsigned long long n2) {
+    int freq[10] = {}; // Frequency array for digits 0-9
+    // Count digits in n1
+    while (n1 != 0) {
+        freq[n1 % 10]++;
+        n1 /= 10;
+    }
+
+    // Subtract digit count for n2
+    while (n2 != 0) {
+        freq[n2 % 10]--;
+        n2 /= 10;
+    }
+
+    // If all values in freq are 0, they have the same digits
+    for (int i = 0; i < 10; i++) {
+        if (freq[i] != 0) return false;
+    }
+
+    return true;
+}
+
 int main() {
-    //findLowestInt(325); //#Because 477 * 325 = 155025 ,477 * 326 = 155502
-    findLowestInt(100); //(100) === 8919
+    findLowestInt(325); //#Because 477 * 325 = 155025 ,477 * 326 = 155502
+   // findLowestInt(100); //(100) === 8919
     return 0;
 }

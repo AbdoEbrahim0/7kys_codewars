@@ -1,0 +1,79 @@
+
+//methode 1    best performance O(N)
+//bool is_isogram(const std::string& str)
+//{
+//    int letters[26] = {};
+//    for (char c : str)
+//    {
+//        c = tolower(c);
+//        letters[c - 'a']++;
+//        if (letters[c - 'a'] == 2) return false;
+//    }
+//    return true;
+//}
+
+bool is_isogram(const std::string& str)
+{
+    std::bitset<26> letters; // More memory efficient than int array
+    int count = 0;
+
+    for (char c : str)
+    {
+        if (!std::isalpha(c)) continue; // Ignore non-letter characters
+
+        c = std::tolower(c);
+        if (letters.test(c - 'a')) return false; // If already set, return false
+
+        letters.set(c - 'a'); // Mark character as seen
+        count++;
+
+        if (count > 26) return false; // More than 26 letters = not an isogram
+    }
+
+    return true;
+}
+//
+////methode 3 O(N) but not simple because of container
+//bool is_isogram(const std::string& str)
+//{
+//    map<char, int> my_map = {};
+//    char c;
+//    for (int i = 0; i < str.size(); i++)
+//    {
+//        c = tolower(str[i]);
+//        my_map.insert({c , my_map[c]++ });
+//        if (my_map[c] == 2) return false;
+//    }
+//    return true;
+////}
+////methode 3 O(N^2)
+//bool is_isogram(const std::string& str)
+//{
+//  
+//    int counter_1 ;
+//    
+//    char c;
+//    for (int i = 0; i < str.size(); i++)
+//    {
+//        counter_1 = 0;
+//        c = tolower(str[i]);
+//        for (char x : str)
+//        {
+//            if (isalpha(x))
+//            {
+//            if(tolower(x) ==c)
+//                    counter_1++;
+//            if (counter_1 == 2) return false;
+//            }   
+//        }   
+//    }
+//    return true;
+//}
+//methode 4 sorting log n then check if repeated 
+
+int main() {
+    is_isogram("Dermatoglyphics");
+    is_isogram("moOse");
+    //a:97   z:122  
+    return 0;
+}

@@ -11,29 +11,28 @@
 //    }
 //    return true;
 //}
-
-bool is_isogram(const std::string& str)
-{
-    std::bitset<26> letters; // More memory efficient than int array
-    int count = 0;
-
-    for (char c : str)
-    {
-        if (!std::isalpha(c)) continue; // Ignore non-letter characters
-
-        c = std::tolower(c);
-        if (letters.test(c - 'a')) return false; // If already set, return false
-
-        letters.set(c - 'a'); // Mark character as seen
-        count++;
-
-        if (count > 26) return false; // More than 26 letters = not an isogram
-    }
-
-    return true;
-}
+//methode 1     [optimized] 
+//bool is_isogram(const std::string& str)
+//{
+//    std::bitset<26> letters; // More memory efficient than int array
+//    int count = 0;
+//    for (char c : str)
+//    {
+//        if (!std::isalpha(c)) continue; // Ignore non-letter characters
 //
-////methode 3 O(N) but not simple because of container
+//        c = std::tolower(c);
+//        if (letters.test(c - 'a')) return false; // If already set, return false
+//
+//        letters.set(c - 'a'); // Mark character as seen
+//        count++;
+//
+//        if (count > 26) return false; // More than 26 letters = not an isogram
+//    }
+//
+//    return true;
+//}
+//
+////methode 2 O(N) but not simple because of container
 //bool is_isogram(const std::string& str)
 //{
 //    map<char, int> my_map = {};
@@ -46,6 +45,24 @@ bool is_isogram(const std::string& str)
 //    }
 //    return true;
 ////}
+//methode 2 O(N) [optimized]
+
+//bool is_isogram(const std::string& str)
+//{
+//    std::unordered_map<char, bool> seen;
+//
+//    for (char c : str)
+//    {
+//        if (!std::isalpha(c)) continue; // Ignore non-letters
+//
+//        c = std::tolower(c);
+//        if (seen[c]) return false; // If character already exists, return false
+//
+//        seen[c] = true;
+//    }
+//
+//    return true;
+//}
 ////methode 3 O(N^2)
 //bool is_isogram(const std::string& str)
 //{
@@ -69,11 +86,41 @@ bool is_isogram(const std::string& str)
 //    }
 //    return true;
 //}
-//methode 4 sorting log n then check if repeated 
-
+//methode 3 [optimized] still O(N^2)
+//bool is_isogram(const std::string& str)
+//{
+//    for (char c : str)
+//    {
+//        if (!std::isalpha(c)) continue; // Ignore non-letters
+//
+//        c = std::tolower(c);
+//        if (std::count(str.begin(), str.end(), c) > 1) return false; // Check occurrences
+//    }
+//
+//    return true;
+//}
+//methode 4 sorting n log n 
+bool is_isogram(const std::string& str)
+{
+    vector<char>vec;
+    for (char c : str)
+    {
+         c= tolower(c);
+        if(isalpha(c))
+        vec.push_back(c);
+    }
+    sort(vec.begin(), vec.end());
+    for (int i=1;i<vec.size();i++)
+    {
+        if (vec[i] == vec[i - 1]) return false;
+    }
+    return true;
+}
 int main() {
-    is_isogram("Dermatoglyphics");
-    is_isogram("moOse");
+    //is_isogram("De*)rmatoglyphics");
+    //is_isogram("moOse");
+    is_isogram("Aa");
+
     //a:97   z:122  
     return 0;
 }

@@ -1,0 +1,76 @@
+using namespace std;
+
+
+
+//methode 1    O(N^2)
+
+vector <int> productArray(vector <int> numbers)
+{
+    int p;
+    vector<int> v;
+    for (int i = 0; i < numbers.size(); i++)
+    {
+        p = 1;
+        for (int j = 0; j < numbers.size(); j++)
+        {
+            if (i == j) continue;
+            p *= numbers.at(j);
+        }
+        v.emplace_back(p);
+    }
+    return v;
+}
+//methode 1 [optimized]   O(N)
+
+vector <int> productArray(vector <int> numbers)
+{
+    int p = 1; ;
+    vector<int> v;
+    for (int i = 0; i < numbers.size(); i++)
+    {
+        p *= numbers.at(i);//a*b*c  
+    }
+
+    for (int i = 0; i < numbers.size(); i++)
+    {
+        v.push_back(p / numbers[i]); //  a*b*c/a =b*c a*b*c/b =ac a*b*c/c =ab; 
+    }
+    return v;
+}
+int main() {
+
+    return 0;
+}
+
+
+// methode 1 O(N)
+//bool any_odd(unsigned x) {
+//    int idx = 0;
+//    while (x != 0)
+//    {
+//        if (idx % 2 != 0) //any oddd bit if 1 return true 
+//        {
+//            if (x % 2 == 1)
+//                return true;
+//        }
+//        idx++;;
+//        x = x / 2;
+//    }
+//    return false;
+//}
+        // methode 2 O(1)
+//int any_odd(unsigned x) {
+//    auto d = 0xAAAAAAAA;
+//    return ((x & 0xAAAAAAAA) ==x) ? 1 : 0;
+//}
+        // methode 3 O(N)
+//int any_odd(unsigned x) {
+//    std::string str = std::bitset<std::numeric_limits<unsigned>::digits>(x).to_string();
+//
+//    for (int i = str.size() - 1; i >= 0; i--)
+//    {
+//        if ((str.size() - 1 - i) % 2 == 1 && str[i] == '1')
+//            return 1;
+//    }
+//    return 0;
+//}

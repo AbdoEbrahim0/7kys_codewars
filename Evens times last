@@ -1,0 +1,11 @@
+int even_last(std::vector<int> nums) {
+  int size = nums.size();
+  if (size == 0) return 0;  
+  int sum = 0;
+    for (int i = 0; i < size; i ++)
+    {
+        if (!(i & 1))// not odd
+            sum += nums.at(i);
+    }
+    return sum*nums.at(size-1);
+}

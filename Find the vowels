@@ -1,0 +1,46 @@
+//methode 1    O(N) * O(12)=O(N)  
+//std::vector<int> vowelIndices(const std::string& word)
+//{
+//
+//    std::vector<int> res;
+//    char c[12] = { 'a','e','i','o','u','y' , 'A','E','I','O','U','Y' };
+//    for (int i = 0; i < word.size(); i++)
+//    {
+//        for (char cc : c)
+//        {
+//            if (word[i] == cc)
+//                res.push_back(i + 1);
+//        }
+//
+//    }
+//    return res;
+//}
+//methode 2    O(N) *O(1) faster look up than O(12)
+std::vector<int> vowelIndices(const std::string& word)
+{
+
+    std::vector<int> res;
+    //char c[12] = { 'a','e','i','o','u','y' , 'A','E','I','O','U','Y' };
+    unordered_set <char>U_set = { 'a','e','i','o','u','y' , 'A','E','I','O','U','Y' };
+    for (int i = 0; i < word.size(); i++)
+    {
+        
+            if ( U_set.find(word[i]) !=U_set.end())
+                res.push_back(i + 1);
+    }
+    return res;
+}
+//methode 2 [optimized]    O(N) *O(1) faster look up even than O(1) & avoid overhead of unordered set
+std::vector<int> vowelIndices(const std::string& word) {
+    std::vector<int> res;
+
+    // Boolean lookup table (ASCII-based)
+    std::array<bool, 128> isVowel = {};
+    for (char c : {'a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'})
+        isVowel[c] = true;
+    for (size_t i = 0; i < word.size(); i++) {
+        if (isVowel[word[i]])  // O(1) lookup
+            res.push_back(i + 1);
+    }
+    return res;
+}

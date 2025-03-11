@@ -1,0 +1,16 @@
+int sum_of_minimums(const std::vector<std::vector<int>>& numbers)
+{
+    int sum = 0;
+    int min;
+    for (vector<int> v : numbers)
+    {
+        min = v.at(0);
+        for (int val: v)
+        {
+            if (val < min)
+                min = val;
+        }
+        sum += min;
+    }
+    return sum;
+}
